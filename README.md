@@ -1,2 +1,7 @@
-# rrze-link-checker
-WP-Plugin: Überprüfung auf fehlerhafte Links.
+RRZE-Link-Checker
+=================
+
+WordPress Plugin
+----------------
+
+Überprüfung auf fehlerhafte Links.
