@@ -2,7 +2,7 @@
 /**
  * Plugin Name: RRZE-Link-Checker
  * Description: Überprüfung auf defekte Links.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Rolf v. d. Forst
  * Author URI: http://blogs.fau.de/webworking/
  * License: GPLv2 or later
@@ -134,12 +134,12 @@ class RRZE_LC {
 
         // Überprüft die minimal erforderliche PHP-Version.
         if (version_compare(PHP_VERSION, RRZE_LC_MIN_PHP_VERSION, '<')) {
-            $error = sprintf(__('Ihre PHP-Version %s ist veraltet. Bitte aktualisieren Sie mindestens auf die PHP-Version %s.', RRZE_LC_TEXTDOMAIN), PHP_VERSION, self::php_version);
+            $error = sprintf(__('Ihre PHP-Version %s ist veraltet. Bitte aktualisieren Sie mindestens auf die PHP-Version %s.', RRZE_LC_TEXTDOMAIN), PHP_VERSION, RRZE_LC_MIN_PHP_VERSION);
         }
 
         // Überprüft die minimal erforderliche WP-Version.
         elseif (version_compare($GLOBALS['wp_version'], RRZE_LC_MIN_WP_VERSION, '<')) {
-            $error = sprintf(__('Ihre Wordpress-Version %s ist veraltet. Bitte aktualisieren Sie mindestens auf die Wordpress-Version %s.', RRZE_LC_TEXTDOMAIN), $GLOBALS['wp_version'], self::wp_version);
+            $error = sprintf(__('Ihre Wordpress-Version %s ist veraltet. Bitte aktualisieren Sie mindestens auf die Wordpress-Version %s.', RRZE_LC_TEXTDOMAIN), $GLOBALS['wp_version'], RRZE_LC_MIN_WP_VERSION);
         }
 
         elseif (is_multisite() && $networkwide) {
