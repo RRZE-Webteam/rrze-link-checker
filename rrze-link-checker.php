@@ -2,7 +2,7 @@
 /**
  * Plugin Name: RRZE-Link-Checker
  * Description: Überprüfung auf defekte Links.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: Rolf v. d. Forst
  * Author URI: http://blogs.fau.de/webworking/
  * License: GPLv2 or later
@@ -78,8 +78,6 @@ class RRZE_LC {
         self::update_version();
         
         $this->async_task();
-                
-        add_action('init', array($this, 'update_version'));
         
         add_action('admin_init', array($this, 'check_links'));
         add_action('admin_init', array($this, 'check_save_post'));

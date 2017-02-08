@@ -1,6 +1,6 @@
 <?php
 
-define('RRZE_LC_VERSION', '1.0.0');
+define('RRZE_LC_VERSION', '1.0.2');
 define('RRZE_LC_VERSION_OPTION_NAME', 'rrze_lc_version');
 
 define('RRZE_LC_OPTION_NAME', 'rrze_lc');
