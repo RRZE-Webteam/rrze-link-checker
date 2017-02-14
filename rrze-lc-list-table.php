@@ -26,7 +26,7 @@ class RRZE_LC_List_Table extends WP_List_Table {
         $columns = array(
             'url' => __('Link-Url', RRZE_LC_TEXTDOMAIN),
             'text' => __('Fehlermeldung', RRZE_LC_TEXTDOMAIN),
-            'source' => __('Quelle', RRZE_LC_TEXTDOMAIN)
+            'source' => __('Dokument', RRZE_LC_TEXTDOMAIN)
         );
         return $columns;
     }

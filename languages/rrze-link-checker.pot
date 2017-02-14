@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RRZE Link-Checker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-03 15:42+0100\n"
+"POT-Creation-Date: 2017-02-14 17:12+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: RRZE-Webteam\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../rrze-lc-helper.php:40 ../rrze-lc-helper.php:52
-#: ../rrze-link-checker.php:689
+#: ../rrze-link-checker.php:687
 msgid "Unbekannt"
 msgstr ""
 
@@ -443,140 +443,140 @@ msgstr ""
 msgid "No connection available"
 msgstr ""
 
-#: ../rrze-lc-list-table.php:41
+#: ../rrze-lc-list-table.php:27
 msgid "Link-Url"
 msgstr ""
 
-#: ../rrze-lc-list-table.php:42
+#: ../rrze-lc-list-table.php:28
 msgid "Fehlermeldung"
 msgstr ""
 
-#: ../rrze-lc-list-table.php:43
-msgid "Quelle"
+#: ../rrze-lc-list-table.php:29
+msgid "Dokument"
 msgstr ""
 
-#: ../rrze-link-checker.php:137
+#: ../rrze-link-checker.php:135
 #, php-format
 msgid ""
 "Ihre PHP-Version %s ist veraltet. Bitte aktualisieren Sie mindestens auf die "
 "PHP-Version %s."
 msgstr ""
 
-#: ../rrze-link-checker.php:142
+#: ../rrze-link-checker.php:140
 #, php-format
 msgid ""
 "Ihre Wordpress-Version %s ist veraltet. Bitte aktualisieren Sie mindestens "
 "auf die Wordpress-Version %s."
 msgstr ""
 
-#: ../rrze-link-checker.php:146
+#: ../rrze-link-checker.php:144
 msgid "Dieses Plugin kann nicht netzwerkweit aktiviert werden."
 msgstr ""
 
-#: ../rrze-link-checker.php:303
+#: ../rrze-link-checker.php:301
 msgid "Einstellungen &rsaquo; Link-Checker"
 msgstr ""
 
-#: ../rrze-link-checker.php:323 ../rrze-link-checker.php:478
+#: ../rrze-link-checker.php:321 ../rrze-link-checker.php:476
 msgid "Link-Checker"
 msgstr ""
 
-#: ../rrze-link-checker.php:324 ../rrze-link-checker.php:338
+#: ../rrze-link-checker.php:322 ../rrze-link-checker.php:336
 msgid "Fehlerhafte Links"
 msgstr ""
 
-#: ../rrze-link-checker.php:328
+#: ../rrze-link-checker.php:326
 msgid "Einstellungen"
 msgstr ""
 
-#: ../rrze-link-checker.php:347
+#: ../rrze-link-checker.php:345
 msgid "Link-Checker &rsaquo; Einstellungen"
 msgstr ""
 
-#: ../rrze-link-checker.php:368
+#: ../rrze-link-checker.php:366
 msgid "Einträge pro Seite:"
 msgstr ""
 
-#: ../rrze-link-checker.php:385
-msgid "Post-Types"
+#: ../rrze-link-checker.php:383
+msgid "Dokumentenart"
 msgstr ""
 
-#: ../rrze-link-checker.php:386
-msgid "Post-Status"
+#: ../rrze-link-checker.php:384
+msgid "Status"
 msgstr ""
 
-#: ../rrze-link-checker.php:422
+#: ../rrze-link-checker.php:420
 msgid "Schummeln, was?"
 msgstr ""
 
-#: ../rrze-link-checker.php:426
+#: ../rrze-link-checker.php:424
 msgid ""
 "Sie haben nicht die erforderlichen Rechte, um diese Aktion durchzuführen."
 msgstr ""
 
-#: ../rrze-link-checker.php:431
+#: ../rrze-link-checker.php:429
 msgid "Einstellungen gespeichert."
 msgstr ""
 
-#: ../rrze-link-checker.php:451
-msgid "Der Post-Types-Feld ist erforderlich."
+#: ../rrze-link-checker.php:449
+msgid "Der Dokumentenart-Feld ist erforderlich."
 msgstr ""
 
-#: ../rrze-link-checker.php:460
-msgid "Der Post-Status-Feld ist erforderlich."
+#: ../rrze-link-checker.php:458
+msgid "Der Status-Feld ist erforderlich."
 msgstr ""
 
-#: ../rrze-link-checker.php:591
+#: ../rrze-link-checker.php:589
 msgid "Fehlerhafte Links anschauen"
 msgstr ""
 
-#: ../rrze-link-checker.php:592
+#: ../rrze-link-checker.php:590
 #, php-format
 msgid "%d fehlerhafte Links gefunden."
 msgid_plural "%d fehlerhafte Links gefunden."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../rrze-link-checker.php:596
+#: ../rrze-link-checker.php:594
 msgid "Keine fehlerhaften Links gefunden."
 msgstr ""
 
-#: ../rrze-link-checker.php:602
+#: ../rrze-link-checker.php:600
 #, php-format
 msgid "%d Dokument in der Warteschlange"
 msgid_plural "%d Dokumente in der Warteschlange"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../rrze-link-checker.php:605
+#: ../rrze-link-checker.php:603
 msgid "Keine Dokumente in der Warteschlange."
 msgstr ""
 
-#: ../rrze-link-checker.php:692
+#: ../rrze-link-checker.php:690
 msgid "Veröffentlicht"
 msgstr ""
 
-#: ../rrze-link-checker.php:693
+#: ../rrze-link-checker.php:691
 msgid "Entwurf"
 msgstr ""
 
-#: ../rrze-link-checker.php:694
+#: ../rrze-link-checker.php:692
 msgid "Geplant"
 msgstr ""
 
-#: ../rrze-link-checker.php:695
+#: ../rrze-link-checker.php:693
 msgid "Privat"
 msgstr ""
 
-#: ../rrze-link-checker.php:696
+#: ../rrze-link-checker.php:694
 msgid "Ausstehender Review"
 msgstr ""
 
-#: ../rrze-link-checker.php:697
+#: ../rrze-link-checker.php:695
 msgid "Papierkorb"
 msgstr ""
 
-#: ../rrze-link-checker.php:740
+#: ../rrze-link-checker.php:738
 #, php-format
 msgid "%d fehlerhafte Links gefunden:"
 msgid_plural "%d fehlerhafte Links gefunden:"

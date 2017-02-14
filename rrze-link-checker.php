@@ -2,7 +2,7 @@
 /**
  * Plugin Name: RRZE-Link-Checker
  * Description: Überprüfung auf defekte Links.
- * Version: 1.0.3
+ * Version: 1.0.1
  * Author: Rolf v. d. Forst
  * Author URI: http://blogs.fau.de/webworking/
  * License: GPLv2 or later
@@ -380,8 +380,8 @@ class RRZE_LC {
     
     public function links_settings() {
         add_settings_section(RRZE_LC_OPTION_NAME . '_settings_section', FALSE, '__return_false', RRZE_LC_OPTION_NAME . '_settings');
-        add_settings_field('post_types', __('Post-Types', RRZE_LC_TEXTDOMAIN), array($this, 'post_types_field'), RRZE_LC_OPTION_NAME . '_settings', RRZE_LC_OPTION_NAME . '_settings_section');
-        add_settings_field('post_status', __('Post-Status', RRZE_LC_TEXTDOMAIN), array($this, 'post_status_field'), RRZE_LC_OPTION_NAME . '_settings', RRZE_LC_OPTION_NAME . '_settings_section');
+        add_settings_field('post_types', __('Dokumentenart', RRZE_LC_TEXTDOMAIN), array($this, 'post_types_field'), RRZE_LC_OPTION_NAME . '_settings', RRZE_LC_OPTION_NAME . '_settings_section');
+        add_settings_field('post_status', __('Status', RRZE_LC_TEXTDOMAIN), array($this, 'post_status_field'), RRZE_LC_OPTION_NAME . '_settings', RRZE_LC_OPTION_NAME . '_settings_section');
     }
     
     public function post_types_field() {
@@ -446,7 +446,7 @@ class RRZE_LC {
 
         $input['post_types'] = $this->clean_post_type_options($input['post_types']);        
         if (empty($input['post_types'])) {
-            $errors[] = __('Der Post-Types-Feld ist erforderlich.', RRZE_LC_TEXTDOMAIN);
+            $errors[] = __('Der Dokumentenart-Feld ist erforderlich.', RRZE_LC_TEXTDOMAIN);
         }
 
         if (empty($input['post_status'])) {
@@ -455,7 +455,7 @@ class RRZE_LC {
 
         $input['post_status'] = $this->clean_post_status_options($input['post_status']);        
         if (empty($input['post_status'])) {
-            $errors[] = __('Der Post-Status-Feld ist erforderlich.', RRZE_LC_TEXTDOMAIN);
+            $errors[] = __('Der Status-Feld ist erforderlich.', RRZE_LC_TEXTDOMAIN);
         }
         
         if(!empty($errors)) {
