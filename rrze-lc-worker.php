@@ -27,70 +27,83 @@ class RRZE_LC_Worker {
             $where .= sprintf(' AND post_status IN (%s)', implode(',', array_map(create_function('$a', 'return "\'$a\'";'), $post_status)));
         }
         
-        $posts = $wpdb->get_results(sprintf("SELECT ID FROM %s %s ORDER BY ID ASC", $wpdb->prefix . RRZE_LC_POSTS_TABLE, $where));
+        $posts = $wpdb->get_results(sprintf("SELECT ID FROM %s %s ORDER BY checked ASC", $wpdb->prefix . RRZE_LC_POSTS_TABLE, $where));
         
-        foreach ($posts as $post) {
-            
-            $wpdb->update( 
-                $wpdb->prefix . RRZE_LC_POSTS_TABLE, 
-                array( 
-                    'checked' => current_time('mysql')
-                ), 
-                array(
-                    'ID' => $post->ID
-                ), 
-                array( 
-                    '%s'
-                ), 
-                array(
-                    '%d'
-                )
-            );
-                                    
-            $wpdb->delete(
-                $wpdb->prefix . RRZE_LC_ERRORS_TABLE,
-                array(
-                    'post_id' => $post->ID
-                ),
-                array(
-                    '%d'
-                )
-            );
-            
-            $errors = RRZE_LC_Helper::check_urls($post->ID);
-            
-            if(empty($errors)) {
-                continue;
-            }
-            
-            foreach($errors as $error) {
-                $error = (object) $error;
-                                
-                $wpdb->insert( 
-                    $wpdb->prefix . RRZE_LC_ERRORS_TABLE, 
-                    array( 
-                        'post_id' => $post->ID, 
-                        'post_title' => $error->post_title,
-                        'url' => $error->url,
-                        'text' => $error->text
-                    ), 
-                    array( 
-                        '%d', 
-                        '%s',
-                        '%s',
-                        '%s'
-                    ) 
-                );               
-            }
-                        
+        foreach ($posts as $post) {            
+            self::check_urls($post->ID);           
         }
 
     }
-        
+     
     public static function update_settings() {
         RRZE_LC::truncate_db_tables();
         RRZE_LC::setup_db_tables();
         self::scan();
     }
             
+    public static function rescan_post($post_id = NULL) {
+        self::check_urls($post_id);
+    }
+    
+    private static function check_urls($post_id = NULL) {
+        global $wpdb;
+        
+        if(empty($post_id)) {
+            return;
+        }
+        
+        $wpdb->update( 
+            $wpdb->prefix . RRZE_LC_POSTS_TABLE, 
+            array( 
+                'checked' => current_time('mysql')
+            ), 
+            array(
+                'ID' => $post_id
+            ), 
+            array( 
+                '%s'
+            ), 
+            array(
+                '%d'
+            )
+        );
+
+        $wpdb->delete(
+            $wpdb->prefix . RRZE_LC_ERRORS_TABLE,
+            array(
+                'post_id' => $post_id
+            ),
+            array(
+                '%d'
+            )
+        );
+        
+        $errors = RRZE_LC_Helper::check_urls($post_id);
+
+        if(empty($errors)) {
+            return;
+        }
+
+        foreach($errors as $error) {
+            $error = (object) $error;
+
+            $wpdb->insert( 
+                $wpdb->prefix . RRZE_LC_ERRORS_TABLE, 
+                array( 
+                    'post_id' => $post_id, 
+                    'post_title' => $error->post_title,
+                    'url' => $error->url,
+                    'text' => $error->text
+                ), 
+                array( 
+                    '%d', 
+                    '%s',
+                    '%s',
+                    '%s'
+                ) 
+            );               
+        }        
+        
+    }
+    
 }

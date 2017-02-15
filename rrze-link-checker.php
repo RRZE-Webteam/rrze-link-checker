@@ -2,7 +2,7 @@
 /**
  * Plugin Name: RRZE-Link-Checker
  * Description: Überprüfung auf defekte Links.
- * Version: 1.0.5
+ * Version: 1.1.0
  * Author: Rolf v. d. Forst
  * Author URI: http://blogs.fau.de/webworking/
  * License: GPLv2 or later
@@ -80,8 +80,9 @@ class RRZE_LC {
         $this->async_task();
         
         add_action('admin_init', array($this, 'check_links'));
-        add_action('admin_init', array($this, 'check_save_post'));
-        add_action('admin_init', array($this, 'check_delete_post'));
+        add_action('delete_post', array($this, 'delete_post'));
+        
+        add_action('contextual_help', array($this, 'post_edit_screen'));
         
         add_action('admin_menu', array($this, 'links_menu'));
         add_action('admin_init', array($this, 'links_settings'));
@@ -177,6 +178,11 @@ class RRZE_LC {
     public static function setup_db_tables() {
         global $wpdb;
                 
+        $row = $wpdb->get_row(sprintf("SELECT ID FROM %s", $wpdb->prefix . RRZE_LC_POSTS_TABLE));
+        if(!empty($row)) {
+            return;
+        }
+        
         $post_types = self::$options->post_types;
         $post_status = self::$options->post_status;
         
@@ -198,11 +204,7 @@ class RRZE_LC {
 
         $ps_sql = implode(' OR ', $ps_arry);
         
-        $row = $wpdb->get_row(sprintf("SELECT ID FROM %s", $wpdb->prefix . RRZE_LC_POSTS_TABLE));
-        if(empty($row)) {
-            $wpdb->query(sprintf("INSERT INTO %s (ID, post_type, post_status) SELECT ID, post_type, post_status FROM $wpdb->posts WHERE (%s) AND (%s) ORDER BY ID ASC", $wpdb->prefix . RRZE_LC_POSTS_TABLE, $pt_sql, $ps_sql));
-        }
-        
+        $wpdb->query(sprintf("INSERT INTO %s (ID, post_type, post_status) SELECT ID, post_type, post_status FROM $wpdb->posts WHERE (%s) AND (%s) ORDER BY ID ASC", $wpdb->prefix . RRZE_LC_POSTS_TABLE, $pt_sql, $ps_sql));        
     }
     
     public static function truncate_db_tables() {
@@ -266,7 +268,10 @@ class RRZE_LC {
         add_action('wp_async_rrze_lc_scan_task', array($this, 'scan_task'));
         
         $update_settings_task = new RRZE_LC_Update_Settings_Task();
-        add_action('wp_async_rrze_lc_update_settings_task', array($this, 'update_settings_task'));        
+        add_action('wp_async_rrze_lc_update_settings_task', array($this, 'update_settings_task'));
+        
+        $save_post_task = new RRZE_LC_Save_Post_Task();
+        add_action('wp_async_save_post', array($this, 'save_post'));
     }
     
     public function scan_task() {
@@ -477,17 +482,32 @@ class RRZE_LC {
         }
     }
 
-    public function check_save_post() {
-        if ((defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) OR (defined('DOING_CRON') && DOING_CRON) OR (defined('DOING_AJAX') && DOING_AJAX) OR (defined('XMLRPC_REQUEST') && XMLRPC_REQUEST) ) {
+    public function post_edit_screen() {
+        global $wpdb;
+        
+        $current_screen = get_current_screen();
+
+        if ($current_screen->base != 'post' || $current_screen->parent_base != 'edit') {
             return;
         }
         
-        add_action('save_post', array($this, 'save_post'));
-        add_action('admin_notices', array($this, 'post_admin_notices'), 99);        
+        $post = get_post();
+        
+        $errors = $wpdb->get_results(sprintf("SELECT url, text FROM %s WHERE post_id = %d", $wpdb->prefix . RRZE_LC_ERRORS_TABLE, $post->ID));
+
+        if(!empty($errors)) {
+            set_transient($this->transient_hash(), $errors, 30);
+        }
+        
+        add_action('admin_notices', array($this, 'post_admin_notices'), 99);
     }
     
     public function save_post($post_id) {
         global $wpdb;
+
+        if ((defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) OR (defined('DOING_CRON') && DOING_CRON) OR (defined('DOING_AJAX') && DOING_AJAX) OR (defined('XMLRPC_REQUEST') && XMLRPC_REQUEST) ) {
+            return;
+        }
         
         $post_type = get_post_type($post_id);
 
@@ -510,9 +530,11 @@ class RRZE_LC {
                 ), 
                 array( 
                     '%d',
-                    '%s' 
+                    '%s'
                 ) 
             );
+            
+            RRZE_LC_Worker::rescan_post($post_id);
         } else {
             $wpdb->delete(
                 $wpdb->prefix . RRZE_LC_POSTS_TABLE,
@@ -525,15 +547,6 @@ class RRZE_LC {
             );                
         }
 
-        $errors = $this->check_urls($post_id, RRZE_LC_SAVE_POST_MAX_CHECK_URLS);
-
-        if(!empty($errors)) {
-            set_transient($this->transient_hash(), $errors, 30);
-        }
-    }
-
-    public function check_delete_post() {
-        add_action('delete_post', array($this, 'delete_post'));
     }
     
     public function delete_post($post_id) {
@@ -597,7 +610,7 @@ class RRZE_LC {
         if ($queue_count > 0) {
             $output .= sprintf(
                 "<p>" .
-                _n('%d Dokument in der Warteschlange', '%d Dokumente in der Warteschlange', $queue_count, RRZE_LC_TEXTDOMAIN), $queue_count) .
+                _n('%d Dokument in der Warteschlange.', '%d Dokumente in der Warteschlange.', $queue_count, RRZE_LC_TEXTDOMAIN), $queue_count) .
                 "</p>";
         } else {
             $output .= sprintf('<p>%s</p>', __('Keine Dokumente in der Warteschlange.', RRZE_LC_TEXTDOMAIN));
@@ -715,10 +728,6 @@ class RRZE_LC {
     }
     
     public function post_admin_notices() {
-        if (empty($GLOBALS['pagenow']) OR empty($_GET['message']) OR $GLOBALS['pagenow'] !== 'post.php') {
-            return;
-        }
-
         $hash = $this->transient_hash();
 
         if ((!$errors = get_transient($hash)) OR (!is_array($errors))) {
@@ -729,7 +738,7 @@ class RRZE_LC {
 
         $errors_output = array();
         foreach ($errors as $error) {
-            $errors_output[] = sprintf('<a href="%1$s" target="_blank">%1$s</a> (%2$s)', esc_url($error['url']), esc_html($error['text']));
+            $errors_output[] = sprintf('<a href="%1$s" target="_blank">%1$s</a> (%2$s)', esc_url($error->url), esc_html($error->text));
         }
         
         $errors_count = count($errors_output);

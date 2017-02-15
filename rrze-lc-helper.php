@@ -2,7 +2,7 @@
 
 class RRZE_LC_Helper {
     
-    public static function check_urls($post_id = NULL, $max_check_urls = NULL) {
+    public static function check_urls($post_id = NULL) {
         if (empty($post_id)) {
             return FALSE;
         }
@@ -17,10 +17,6 @@ class RRZE_LC_Helper {
 
         if (!$urls = self::extract_urls($post->post_content)) {
             return FALSE;
-        }
-        
-        if (absint($max_check_urls) > 0) {
-            $urls = array_slice($urls, 0, $max_check_urls, TRUE);
         }
         
         $errors = array();
