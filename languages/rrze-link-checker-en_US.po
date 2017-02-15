@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RRZE Link-Checker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-14 17:13+0100\n"
+"POT-Creation-Date: 2017-02-15 17:57+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: RRZE-Webteam\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../rrze-lc-helper.php:40 ../rrze-lc-helper.php:52
-#: ../rrze-link-checker.php:687
+#: ../rrze-link-checker.php:700
 msgid "Unbekannt"
 msgstr "Unknown"
 
@@ -454,7 +454,7 @@ msgstr "Error message"
 msgid "Dokument"
 msgstr "Document"
 
-#: ../rrze-link-checker.php:135
+#: ../rrze-link-checker.php:136
 #, php-format
 msgid ""
 "Ihre PHP-Version %s ist veraltet. Bitte aktualisieren Sie mindestens auf die "
@@ -463,7 +463,7 @@ msgstr ""
 "Your server is running PHP version %s. Please upgrade at least to PHP "
 "version %s."
 
-#: ../rrze-link-checker.php:140
+#: ../rrze-link-checker.php:141
 #, php-format
 msgid ""
 "Ihre Wordpress-Version %s ist veraltet. Bitte aktualisieren Sie mindestens "
@@ -472,119 +472,124 @@ msgstr ""
 "Your Wordpress version is %s. Please upgrade at least to Wordpress version "
 "%s."
 
-#: ../rrze-link-checker.php:144
+#: ../rrze-link-checker.php:145
 msgid "Dieses Plugin kann nicht netzwerkweit aktiviert werden."
 msgstr "This plugin can't be activated networkwide."
 
-#: ../rrze-link-checker.php:301
+#: ../rrze-link-checker.php:306
 msgid "Einstellungen &rsaquo; Link-Checker"
 msgstr "Link Checker Settings"
 
-#: ../rrze-link-checker.php:321 ../rrze-link-checker.php:476
+#: ../rrze-link-checker.php:326 ../rrze-link-checker.php:481
 msgid "Link-Checker"
 msgstr "Link Checker"
 
-#: ../rrze-link-checker.php:322 ../rrze-link-checker.php:336
+#: ../rrze-link-checker.php:327 ../rrze-link-checker.php:341
 msgid "Fehlerhafte Links"
 msgstr "Broken Links"
 
-#: ../rrze-link-checker.php:326
+#: ../rrze-link-checker.php:331
 msgid "Einstellungen"
 msgstr "Settings"
 
-#: ../rrze-link-checker.php:345
+#: ../rrze-link-checker.php:350
 msgid "Link-Checker &rsaquo; Einstellungen"
 msgstr "Settings"
 
-#: ../rrze-link-checker.php:366
+#: ../rrze-link-checker.php:371
 msgid "Einträge pro Seite:"
 msgstr "Number of items per page:"
 
-#: ../rrze-link-checker.php:383
+#: ../rrze-link-checker.php:388
 msgid "Dokumentenart"
 msgstr "Document type"
 
-#: ../rrze-link-checker.php:384
+#: ../rrze-link-checker.php:389
 msgid "Status"
 msgstr "Status"
 
-#: ../rrze-link-checker.php:420
+#: ../rrze-link-checker.php:425
 msgid "Schummeln, was?"
 msgstr "Cheatin&#8217; uh?"
 
-#: ../rrze-link-checker.php:424
+#: ../rrze-link-checker.php:429
 msgid ""
 "Sie haben nicht die erforderlichen Rechte, um diese Aktion durchzuführen."
 msgstr "You do not have permission to perform this action."
 
-#: ../rrze-link-checker.php:429
+#: ../rrze-link-checker.php:434
 msgid "Einstellungen gespeichert."
 msgstr "Settings saved."
 
-#: ../rrze-link-checker.php:449
+#: ../rrze-link-checker.php:454
 msgid "Der Dokumentenart-Feld ist erforderlich."
 msgstr "The document type field is required."
 
-#: ../rrze-link-checker.php:458
+#: ../rrze-link-checker.php:463
 msgid "Der Status-Feld ist erforderlich."
 msgstr "The status field is required."
 
-#: ../rrze-link-checker.php:589
+#: ../rrze-link-checker.php:602
 msgid "Fehlerhafte Links anschauen"
 msgstr "View broken links"
 
-#: ../rrze-link-checker.php:590
+#: ../rrze-link-checker.php:603
 #, php-format
 msgid "%d fehlerhafte Links gefunden."
 msgid_plural "%d fehlerhafte Links gefunden."
 msgstr[0] "Found %d broken link."
 msgstr[1] "Found %d broken links."
 
-#: ../rrze-link-checker.php:594
+#: ../rrze-link-checker.php:607
 msgid "Keine fehlerhaften Links gefunden."
 msgstr "No broken links found."
 
-#: ../rrze-link-checker.php:600
+#: ../rrze-link-checker.php:613
 #, php-format
-msgid "%d Dokument in der Warteschlange"
-msgid_plural "%d Dokumente in der Warteschlange"
-msgstr[0] "%d Document in the work queue"
-msgstr[1] "%d Documents in the work queue"
+msgid "%d Dokument in der Warteschlange."
+msgid_plural "%d Dokumente in der Warteschlange."
+msgstr[0] "%d Document in the work queue."
+msgstr[1] "%d Documents in the work queue."
 
-#: ../rrze-link-checker.php:603
+#: ../rrze-link-checker.php:616
 msgid "Keine Dokumente in der Warteschlange."
 msgstr "No Documents in the work queue."
 
-#: ../rrze-link-checker.php:690
+#: ../rrze-link-checker.php:703
 msgid "Veröffentlicht"
 msgstr "Published"
 
-#: ../rrze-link-checker.php:691
+#: ../rrze-link-checker.php:704
 msgid "Entwurf"
 msgstr "Draft"
 
-#: ../rrze-link-checker.php:692
+#: ../rrze-link-checker.php:705
 msgid "Geplant"
 msgstr "Scheduled"
 
-#: ../rrze-link-checker.php:693
+#: ../rrze-link-checker.php:706
 msgid "Privat"
 msgstr "Private"
 
-#: ../rrze-link-checker.php:694
+#: ../rrze-link-checker.php:707
 msgid "Ausstehender Review"
 msgstr "Pending Review"
 
-#: ../rrze-link-checker.php:695
+#: ../rrze-link-checker.php:708
 msgid "Papierkorb"
 msgstr "Trash"
 
-#: ../rrze-link-checker.php:738
+#: ../rrze-link-checker.php:747
 #, php-format
 msgid "%d fehlerhafte Links gefunden:"
 msgid_plural "%d fehlerhafte Links gefunden:"
 msgstr[0] "Found %d broken link:"
 msgstr[1] "Found %d broken links:"
+
+#~ msgid "%d Dokument in der Warteschlange"
+#~ msgid_plural "%d Dokumente in der Warteschlange"
+#~ msgstr[0] "%d Document in the work queue"
+#~ msgstr[1] "%d Documents in the work queue"
 
 #~ msgid "Quelle"
 #~ msgstr "Source"
