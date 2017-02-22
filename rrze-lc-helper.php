@@ -73,6 +73,9 @@ class RRZE_LC_Helper {
         
         $urls = array();
 
+        // Disable DOMDocument warnings due to invalid HTML
+        libxml_use_internal_errors(true);
+        
         $doc = new DOMDocument();
         $doc->loadHTML('<?xml encoding="UTF-8">' . $html);
 
@@ -118,6 +121,8 @@ class RRZE_LC_Helper {
             $urls[] = $src;
         }
 
+        libxml_clear_errors();
+        
         return $urls;
     }
     

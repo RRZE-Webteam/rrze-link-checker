@@ -2,7 +2,7 @@
 /**
  * Plugin Name: RRZE-Link-Checker
  * Description: Überprüfung auf defekte Links.
- * Version: 1.1.2
+ * Version: 1.1.3
  * Author: Rolf v. d. Forst
  * Author URI: http://blogs.fau.de/webworking/
  * License: GPLv2 or later
