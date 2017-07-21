@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RRZE Link-Checker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-15 17:57+0100\n"
+"POT-Creation-Date: 2017-07-21 16:37+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: RRZE-Webteam\n"
@@ -14,443 +14,447 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.0.2\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../rrze-lc-helper.php:40 ../rrze-lc-helper.php:52
-#: ../rrze-link-checker.php:700
+#: ../rrze-link-checker.php:718
 msgid "Unbekannt"
 msgstr "Unknown"
 
-#: ../rrze-lc-helper.php:151
+#: ../rrze-lc-helper.php:156
 msgid "Bad Request"
 msgstr ""
 
-#: ../rrze-lc-helper.php:152
+#: ../rrze-lc-helper.php:157
 msgid "Unauthorized"
 msgstr ""
 
-#: ../rrze-lc-helper.php:153
+#: ../rrze-lc-helper.php:158
 msgid "Payment Required"
 msgstr ""
 
-#: ../rrze-lc-helper.php:154
+#: ../rrze-lc-helper.php:159
 msgid "Forbidden"
 msgstr ""
 
-#: ../rrze-lc-helper.php:155
+#: ../rrze-lc-helper.php:160
 msgid "Not Found"
 msgstr ""
 
-#: ../rrze-lc-helper.php:156
+#: ../rrze-lc-helper.php:161
 msgid "Method Not Allowed"
 msgstr ""
 
-#: ../rrze-lc-helper.php:157
+#: ../rrze-lc-helper.php:162
 msgid "Not Acceptable"
 msgstr ""
 
-#: ../rrze-lc-helper.php:158
+#: ../rrze-lc-helper.php:163
 msgid "Proxy Authentication Required"
 msgstr ""
 
-#: ../rrze-lc-helper.php:159
+#: ../rrze-lc-helper.php:164
 msgid "Request Timeout"
 msgstr ""
 
-#: ../rrze-lc-helper.php:160
+#: ../rrze-lc-helper.php:165
 msgid "Conflict"
 msgstr ""
 
-#: ../rrze-lc-helper.php:161
+#: ../rrze-lc-helper.php:166
 msgid "Gone"
 msgstr ""
 
-#: ../rrze-lc-helper.php:162
+#: ../rrze-lc-helper.php:167
 msgid "Length Required"
 msgstr ""
 
-#: ../rrze-lc-helper.php:163
+#: ../rrze-lc-helper.php:168
 msgid "Precondition Failed"
 msgstr ""
 
-#: ../rrze-lc-helper.php:164
+#: ../rrze-lc-helper.php:169
 msgid "Request Entity Too Large"
 msgstr ""
 
-#: ../rrze-lc-helper.php:165
+#: ../rrze-lc-helper.php:170
 msgid "Request-URI Too Long"
 msgstr ""
 
-#: ../rrze-lc-helper.php:166
+#: ../rrze-lc-helper.php:171
 msgid "Unsupported Media Type"
 msgstr ""
 
-#: ../rrze-lc-helper.php:167
+#: ../rrze-lc-helper.php:172
 msgid "Requested Range Not Satisfiable"
 msgstr ""
 
-#: ../rrze-lc-helper.php:168
+#: ../rrze-lc-helper.php:173
 msgid "Expectation Failed"
 msgstr ""
 
-#: ../rrze-lc-helper.php:169
+#: ../rrze-lc-helper.php:174
 msgid "Internal Server Error"
 msgstr ""
 
-#: ../rrze-lc-helper.php:170
+#: ../rrze-lc-helper.php:175
 msgid "Not Implemented"
 msgstr ""
 
-#: ../rrze-lc-helper.php:171
+#: ../rrze-lc-helper.php:176
 msgid "Bad Gateway"
 msgstr ""
 
-#: ../rrze-lc-helper.php:172
+#: ../rrze-lc-helper.php:177
 msgid "Service Unavailable"
 msgstr ""
 
-#: ../rrze-lc-helper.php:173
+#: ../rrze-lc-helper.php:178
 msgid "Gateway Timeout"
 msgstr ""
 
-#: ../rrze-lc-helper.php:174
+#: ../rrze-lc-helper.php:179
 msgid "HTTP Version Not Supported"
 msgstr ""
 
-#: ../rrze-lc-helper.php:183
+#: ../rrze-lc-helper.php:188
 msgid "Ok"
 msgstr ""
 
-#: ../rrze-lc-helper.php:184
+#: ../rrze-lc-helper.php:189
 msgid "Unsupported protocol"
 msgstr ""
 
-#: ../rrze-lc-helper.php:185
+#: ../rrze-lc-helper.php:190
 msgid "Failed initialization"
 msgstr ""
 
-#: ../rrze-lc-helper.php:186
+#: ../rrze-lc-helper.php:191
 msgid "URL malformat"
 msgstr ""
 
-#: ../rrze-lc-helper.php:187
+#: ../rrze-lc-helper.php:192
 msgid "Not built-in"
 msgstr ""
 
-#: ../rrze-lc-helper.php:188
+#: ../rrze-lc-helper.php:193
 msgid "Couldn't resolve proxy"
 msgstr ""
 
-#: ../rrze-lc-helper.php:189
+#: ../rrze-lc-helper.php:194
 msgid "Couldn't resolve host"
 msgstr ""
 
-#: ../rrze-lc-helper.php:190
+#: ../rrze-lc-helper.php:195
 msgid "Couldn't connect"
 msgstr ""
 
-#: ../rrze-lc-helper.php:191
+#: ../rrze-lc-helper.php:196
 msgid "FTP weird server reply"
 msgstr ""
 
-#: ../rrze-lc-helper.php:192
+#: ../rrze-lc-helper.php:197
 msgid "Remote access denied"
 msgstr ""
 
-#: ../rrze-lc-helper.php:193
+#: ../rrze-lc-helper.php:198
 msgid "FTP access failed"
 msgstr ""
 
-#: ../rrze-lc-helper.php:194
+#: ../rrze-lc-helper.php:199
 msgid "FTP weird pass reply"
 msgstr ""
 
-#: ../rrze-lc-helper.php:195
+#: ../rrze-lc-helper.php:200
 msgid "FTP accept timeout"
 msgstr ""
 
-#: ../rrze-lc-helper.php:196
+#: ../rrze-lc-helper.php:201
 msgid "FTP weird pasv reply"
 msgstr ""
 
-#: ../rrze-lc-helper.php:197
+#: ../rrze-lc-helper.php:202
 msgid "FTP weird 227 format"
 msgstr ""
 
-#: ../rrze-lc-helper.php:198
+#: ../rrze-lc-helper.php:203
 msgid "FTP can't get host"
 msgstr ""
 
-#: ../rrze-lc-helper.php:199
+#: ../rrze-lc-helper.php:204
 msgid "HTTP2 framing layer problem"
 msgstr ""
 
-#: ../rrze-lc-helper.php:200
+#: ../rrze-lc-helper.php:205
 msgid "FTP couldn't set type"
 msgstr ""
 
-#: ../rrze-lc-helper.php:201
+#: ../rrze-lc-helper.php:206
 msgid "Partial file"
 msgstr ""
 
-#: ../rrze-lc-helper.php:202
+#: ../rrze-lc-helper.php:207
 msgid "FTP couldn't retrieve file"
 msgstr ""
 
-#: ../rrze-lc-helper.php:203
+#: ../rrze-lc-helper.php:208
 msgid "Quote error"
 msgstr ""
 
-#: ../rrze-lc-helper.php:204
+#: ../rrze-lc-helper.php:209
 msgid "HTTP returned error"
 msgstr ""
 
-#: ../rrze-lc-helper.php:205
+#: ../rrze-lc-helper.php:210
 msgid "Write error"
 msgstr ""
 
-#: ../rrze-lc-helper.php:206
+#: ../rrze-lc-helper.php:211
 msgid "Upload failed"
 msgstr ""
 
-#: ../rrze-lc-helper.php:207
+#: ../rrze-lc-helper.php:212
 msgid "Read error"
 msgstr ""
 
-#: ../rrze-lc-helper.php:208
+#: ../rrze-lc-helper.php:213
 msgid "Out of memory"
 msgstr ""
 
-#: ../rrze-lc-helper.php:209
+#: ../rrze-lc-helper.php:214
 msgid "Operation timedout"
 msgstr ""
 
-#: ../rrze-lc-helper.php:210
+#: ../rrze-lc-helper.php:215
 msgid "FTP port failed"
 msgstr ""
 
-#: ../rrze-lc-helper.php:211
+#: ../rrze-lc-helper.php:216
 msgid "FTP couldn't use REST"
 msgstr ""
 
-#: ../rrze-lc-helper.php:212
+#: ../rrze-lc-helper.php:217
 msgid "Range error"
 msgstr ""
 
-#: ../rrze-lc-helper.php:213
+#: ../rrze-lc-helper.php:218
 msgid "HTTP post error"
 msgstr ""
 
-#: ../rrze-lc-helper.php:214
+#: ../rrze-lc-helper.php:219
 msgid "SSL connect error"
 msgstr ""
 
-#: ../rrze-lc-helper.php:215
+#: ../rrze-lc-helper.php:220
 msgid "Bad download resume"
 msgstr ""
 
-#: ../rrze-lc-helper.php:216
+#: ../rrze-lc-helper.php:221
 msgid "File couldn't read file"
 msgstr ""
 
-#: ../rrze-lc-helper.php:217
+#: ../rrze-lc-helper.php:222
 msgid "LDAP cannot bind"
 msgstr ""
 
-#: ../rrze-lc-helper.php:218
+#: ../rrze-lc-helper.php:223
 msgid "LDAP search failed"
 msgstr ""
 
-#: ../rrze-lc-helper.php:219
+#: ../rrze-lc-helper.php:224
 msgid "Function not found"
 msgstr ""
 
-#: ../rrze-lc-helper.php:220
+#: ../rrze-lc-helper.php:225
 msgid "Aborted by callback"
 msgstr ""
 
-#: ../rrze-lc-helper.php:221
+#: ../rrze-lc-helper.php:226
 msgid "Bad function argument"
 msgstr ""
 
-#: ../rrze-lc-helper.php:222
+#: ../rrze-lc-helper.php:227
 msgid "Interface failed"
 msgstr ""
 
-#: ../rrze-lc-helper.php:223
+#: ../rrze-lc-helper.php:228
 msgid "Too many redirections"
 msgstr ""
 
-#: ../rrze-lc-helper.php:224
+#: ../rrze-lc-helper.php:229
 msgid "Unknown option"
 msgstr ""
 
-#: ../rrze-lc-helper.php:225
+#: ../rrze-lc-helper.php:230
 msgid "Telnet option syntax"
 msgstr ""
 
-#: ../rrze-lc-helper.php:226
+#: ../rrze-lc-helper.php:231
 msgid "Peer failed verification"
 msgstr ""
 
-#: ../rrze-lc-helper.php:227
+#: ../rrze-lc-helper.php:232
 msgid "Got nothing"
 msgstr ""
 
-#: ../rrze-lc-helper.php:228
+#: ../rrze-lc-helper.php:233
 msgid "SSL engine not found"
 msgstr ""
 
-#: ../rrze-lc-helper.php:229
+#: ../rrze-lc-helper.php:234
 msgid "SSL engine set failed"
 msgstr ""
 
-#: ../rrze-lc-helper.php:230
+#: ../rrze-lc-helper.php:235
 msgid "Send error"
 msgstr ""
 
-#: ../rrze-lc-helper.php:231
+#: ../rrze-lc-helper.php:236
 msgid "Receive error"
 msgstr ""
 
-#: ../rrze-lc-helper.php:232
+#: ../rrze-lc-helper.php:237
 msgid "Certificate problem"
 msgstr ""
 
-#: ../rrze-lc-helper.php:233
+#: ../rrze-lc-helper.php:238
 msgid "SSL cipher"
 msgstr ""
 
-#: ../rrze-lc-helper.php:234
+#: ../rrze-lc-helper.php:239
 msgid "SSL CA certificate"
 msgstr ""
 
-#: ../rrze-lc-helper.php:235
+#: ../rrze-lc-helper.php:240
 msgid "Bad content encoding"
 msgstr ""
 
-#: ../rrze-lc-helper.php:236
+#: ../rrze-lc-helper.php:241
 msgid "LDAP invalid URL"
 msgstr ""
 
-#: ../rrze-lc-helper.php:237
+#: ../rrze-lc-helper.php:242
 msgid "File size exceeded"
 msgstr ""
 
-#: ../rrze-lc-helper.php:238
+#: ../rrze-lc-helper.php:243
 msgid "Use SSL failed"
 msgstr ""
 
-#: ../rrze-lc-helper.php:239
+#: ../rrze-lc-helper.php:244
 msgid "Send fail rewind"
 msgstr ""
 
-#: ../rrze-lc-helper.php:240
+#: ../rrze-lc-helper.php:245
 msgid "SSL initialization failed"
 msgstr ""
 
-#: ../rrze-lc-helper.php:241
+#: ../rrze-lc-helper.php:246
 msgid "Login denied"
 msgstr ""
 
-#: ../rrze-lc-helper.php:242
+#: ../rrze-lc-helper.php:247
 msgid "TFTP file not found"
 msgstr ""
 
-#: ../rrze-lc-helper.php:243
+#: ../rrze-lc-helper.php:248
 msgid "TFTP permission"
 msgstr ""
 
-#: ../rrze-lc-helper.php:244
+#: ../rrze-lc-helper.php:249
 msgid "Remote disk full"
 msgstr ""
 
-#: ../rrze-lc-helper.php:245
+#: ../rrze-lc-helper.php:250
 msgid "TFTP illegal"
 msgstr ""
 
-#: ../rrze-lc-helper.php:246
+#: ../rrze-lc-helper.php:251
 msgid "FTP unknown ID"
 msgstr ""
 
-#: ../rrze-lc-helper.php:247
+#: ../rrze-lc-helper.php:252
 msgid "Remote file exists"
 msgstr ""
 
-#: ../rrze-lc-helper.php:248
+#: ../rrze-lc-helper.php:253
 msgid "TFTP no such user"
 msgstr ""
 
-#: ../rrze-lc-helper.php:249
+#: ../rrze-lc-helper.php:254
 msgid "Conversion failed"
 msgstr ""
 
-#: ../rrze-lc-helper.php:250
+#: ../rrze-lc-helper.php:255
 msgid "Conversion callbacks"
 msgstr ""
 
-#: ../rrze-lc-helper.php:251
+#: ../rrze-lc-helper.php:256
 msgid "SSL CA certificate bad file"
 msgstr ""
 
-#: ../rrze-lc-helper.php:252
+#: ../rrze-lc-helper.php:257
 msgid "Remote file not found"
 msgstr ""
 
-#: ../rrze-lc-helper.php:253
+#: ../rrze-lc-helper.php:258
 msgid "SSH error"
 msgstr ""
 
-#: ../rrze-lc-helper.php:254
+#: ../rrze-lc-helper.php:259
 msgid "SSL shutdown failed"
 msgstr ""
 
-#: ../rrze-lc-helper.php:255
+#: ../rrze-lc-helper.php:260
 msgid "Socket not ready"
 msgstr ""
 
-#: ../rrze-lc-helper.php:256
+#: ../rrze-lc-helper.php:261
 msgid "SSL CRL bad file"
 msgstr ""
 
-#: ../rrze-lc-helper.php:257
+#: ../rrze-lc-helper.php:262
 msgid "SSL issue error"
 msgstr ""
 
-#: ../rrze-lc-helper.php:258
+#: ../rrze-lc-helper.php:263
 msgid "FTP PRET failed"
 msgstr ""
 
-#: ../rrze-lc-helper.php:259
+#: ../rrze-lc-helper.php:264
 msgid "RTSP CSEQ error"
 msgstr ""
 
-#: ../rrze-lc-helper.php:260
+#: ../rrze-lc-helper.php:265
 msgid "RTSP session error"
 msgstr ""
 
-#: ../rrze-lc-helper.php:261
+#: ../rrze-lc-helper.php:266
 msgid "FTP bad file list"
 msgstr ""
 
-#: ../rrze-lc-helper.php:262
+#: ../rrze-lc-helper.php:267
 msgid "Chunk failed"
 msgstr ""
 
-#: ../rrze-lc-helper.php:263
+#: ../rrze-lc-helper.php:268
 msgid "No connection available"
 msgstr ""
 
-#: ../rrze-lc-list-table.php:27
+#: ../rrze-lc-list-table.php:30 ../rrze-lc-list-table.php:67
+msgid "Löschen"
+msgstr ""
+
+#: ../rrze-lc-list-table.php:51
 msgid "Link-Url"
 msgstr "Link Url"
 
-#: ../rrze-lc-list-table.php:28
+#: ../rrze-lc-list-table.php:52
 msgid "Fehlermeldung"
 msgstr "Error message"
 
-#: ../rrze-lc-list-table.php:29
+#: ../rrze-lc-list-table.php:53
 msgid "Dokument"
 msgstr "Document"
 
@@ -480,11 +484,11 @@ msgstr "This plugin can't be activated networkwide."
 msgid "Einstellungen &rsaquo; Link-Checker"
 msgstr "Link Checker Settings"
 
-#: ../rrze-link-checker.php:326 ../rrze-link-checker.php:481
+#: ../rrze-link-checker.php:326 ../rrze-link-checker.php:499
 msgid "Link-Checker"
 msgstr "Link Checker"
 
-#: ../rrze-link-checker.php:327 ../rrze-link-checker.php:341
+#: ../rrze-link-checker.php:327 ../rrze-link-checker.php:349
 msgid "Fehlerhafte Links"
 msgstr "Broken Links"
 
@@ -492,94 +496,98 @@ msgstr "Broken Links"
 msgid "Einstellungen"
 msgstr "Settings"
 
-#: ../rrze-link-checker.php:350
+#: ../rrze-link-checker.php:353
+msgid "Suche"
+msgstr ""
+
+#: ../rrze-link-checker.php:368
 msgid "Link-Checker &rsaquo; Einstellungen"
 msgstr "Settings"
 
-#: ../rrze-link-checker.php:371
+#: ../rrze-link-checker.php:389
 msgid "Einträge pro Seite:"
 msgstr "Number of items per page:"
 
-#: ../rrze-link-checker.php:388
+#: ../rrze-link-checker.php:406
 msgid "Dokumentenart"
 msgstr "Document type"
 
-#: ../rrze-link-checker.php:389
+#: ../rrze-link-checker.php:407
 msgid "Status"
 msgstr "Status"
 
-#: ../rrze-link-checker.php:425
+#: ../rrze-link-checker.php:443
 msgid "Schummeln, was?"
 msgstr "Cheatin&#8217; uh?"
 
-#: ../rrze-link-checker.php:429
+#: ../rrze-link-checker.php:447
 msgid ""
 "Sie haben nicht die erforderlichen Rechte, um diese Aktion durchzuführen."
 msgstr "You do not have permission to perform this action."
 
-#: ../rrze-link-checker.php:434
+#: ../rrze-link-checker.php:452
 msgid "Einstellungen gespeichert."
 msgstr "Settings saved."
 
-#: ../rrze-link-checker.php:454
+#: ../rrze-link-checker.php:472
 msgid "Der Dokumentenart-Feld ist erforderlich."
 msgstr "The document type field is required."
 
-#: ../rrze-link-checker.php:463
+#: ../rrze-link-checker.php:481
 msgid "Der Status-Feld ist erforderlich."
 msgstr "The status field is required."
 
-#: ../rrze-link-checker.php:602
+#: ../rrze-link-checker.php:620
 msgid "Fehlerhafte Links anschauen"
 msgstr "View broken links"
 
-#: ../rrze-link-checker.php:603
+#: ../rrze-link-checker.php:621
 #, php-format
 msgid "%d fehlerhafte Links gefunden."
 msgid_plural "%d fehlerhafte Links gefunden."
 msgstr[0] "Found %d broken link."
 msgstr[1] "Found %d broken links."
 
-#: ../rrze-link-checker.php:607
+#: ../rrze-link-checker.php:625
 msgid "Keine fehlerhaften Links gefunden."
 msgstr "No broken links found."
 
-#: ../rrze-link-checker.php:613
+#: ../rrze-link-checker.php:631
 #, php-format
 msgid "%d Dokument in der Warteschlange."
 msgid_plural "%d Dokumente in der Warteschlange."
 msgstr[0] "%d Document in the work queue."
 msgstr[1] "%d Documents in the work queue."
 
-#: ../rrze-link-checker.php:616
+#: ../rrze-link-checker.php:634
 msgid "Keine Dokumente in der Warteschlange."
 msgstr "No Documents in the work queue."
 
-#: ../rrze-link-checker.php:703
+#: ../rrze-link-checker.php:721
 msgid "Veröffentlicht"
 msgstr "Published"
 
-#: ../rrze-link-checker.php:704
+#: ../rrze-link-checker.php:722
 msgid "Entwurf"
 msgstr "Draft"
 
-#: ../rrze-link-checker.php:705
+#: ../rrze-link-checker.php:723
 msgid "Geplant"
 msgstr "Scheduled"
 
-#: ../rrze-link-checker.php:706
+#: ../rrze-link-checker.php:724
 msgid "Privat"
 msgstr "Private"
 
-#: ../rrze-link-checker.php:707
+#: ../rrze-link-checker.php:725
 msgid "Ausstehender Review"
 msgstr "Pending Review"
 
-#: ../rrze-link-checker.php:708
+#: ../rrze-link-checker.php:726
 msgid "Papierkorb"
 msgstr "Trash"
 
-#: ../rrze-link-checker.php:747
+#: ../rrze-link-checker.php:765
 #, php-format
 msgid "%d fehlerhafte Links gefunden:"
 msgid_plural "%d fehlerhafte Links gefunden:"
