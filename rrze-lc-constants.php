@@ -12,8 +12,6 @@ define('RRZE_LC_OPTION_NAME_SCAN_TIMESTAMP', 'rrze_lc_scan_timestamp');
 define('RRZE_LC_POSTS_TABLE', 'rrze_lc_posts');
 define('RRZE_LC_ERRORS_TABLE', 'rrze_lc_errors');
 
-define('RRZE_LC_TEXTDOMAIN', 'rrze-link-checker');
-
 define('RRZE_LC_ALLOWED_POST_STATUS', 'publish, future, draft, pending, private, trash');
 
 define('RRZE_LC_MIN_PHP_VERSION', '5.5');

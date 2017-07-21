@@ -2,7 +2,7 @@
 /**
  * Plugin Name: RRZE-Link-Checker
  * Description: Überprüfung auf defekte Links.
- * Version: 1.1.3
+ * Version: 1.2.0
  * Author: Rolf v. d. Forst
  * Author URI: http://blogs.fau.de/webworking/
  * License: GPLv2 or later
@@ -95,7 +95,7 @@ class RRZE_LC {
 
     // Einbindung der Sprachdateien.
     private static function load_textdomain() {    
-        load_plugin_textdomain(RRZE_LC_TEXTDOMAIN, FALSE, sprintf('%s/languages/', dirname(plugin_basename(__FILE__))));
+        load_plugin_textdomain('rrze-link-checker', FALSE, sprintf('%s/languages/', dirname(plugin_basename(__FILE__))));
     }
     
     /*
@@ -133,16 +133,16 @@ class RRZE_LC {
 
         // Überprüft die minimal erforderliche PHP-Version.
         if (version_compare(PHP_VERSION, RRZE_LC_MIN_PHP_VERSION, '<')) {
-            $error = sprintf(__('Ihre PHP-Version %s ist veraltet. Bitte aktualisieren Sie mindestens auf die PHP-Version %s.', RRZE_LC_TEXTDOMAIN), PHP_VERSION, RRZE_LC_MIN_PHP_VERSION);
+            $error = sprintf(__('Ihre PHP-Version %s ist veraltet. Bitte aktualisieren Sie mindestens auf die PHP-Version %s.', 'rrze-link-checker'), PHP_VERSION, RRZE_LC_MIN_PHP_VERSION);
         }
 
         // Überprüft die minimal erforderliche WP-Version.
         elseif (version_compare($GLOBALS['wp_version'], RRZE_LC_MIN_WP_VERSION, '<')) {
-            $error = sprintf(__('Ihre Wordpress-Version %s ist veraltet. Bitte aktualisieren Sie mindestens auf die Wordpress-Version %s.', RRZE_LC_TEXTDOMAIN), $GLOBALS['wp_version'], RRZE_LC_MIN_WP_VERSION);
+            $error = sprintf(__('Ihre Wordpress-Version %s ist veraltet. Bitte aktualisieren Sie mindestens auf die Wordpress-Version %s.', 'rrze-link-checker'), $GLOBALS['wp_version'], RRZE_LC_MIN_WP_VERSION);
         }
 
         elseif (is_multisite() && $networkwide) {
-            $error = __('Dieses Plugin kann nicht netzwerkweit aktiviert werden.', RRZE_LC_TEXTDOMAIN);
+            $error = __('Dieses Plugin kann nicht netzwerkweit aktiviert werden.', 'rrze-link-checker');
         }
         
         // Wenn die Überprüfung fehlschlägt, dann wird das Plugin automatisch deaktiviert.
@@ -303,7 +303,7 @@ class RRZE_LC {
         ?>
         <div class="wrap">
             <?php screen_icon(); ?>
-            <h2><?php echo esc_html(__('Einstellungen &rsaquo; Link-Checker', RRZE_LC_TEXTDOMAIN)); ?></h2>
+            <h2><?php echo esc_html(__('Einstellungen &rsaquo; Link-Checker', 'rrze-link-checker')); ?></h2>
 
             <form method="post" action="options.php">
                 <?php
@@ -323,23 +323,41 @@ class RRZE_LC {
 
         require(RRZE_LC_ROOT . '/rrze-lc-list-table.php');
         
-        $links_page = add_menu_page(__('Link-Checker', RRZE_LC_TEXTDOMAIN), __('Link-Checker', RRZE_LC_TEXTDOMAIN), 'manage_options', RRZE_LC_TEXTDOMAIN, array($this, 'links_page'), 'dashicons-editor-unlink');
-        add_submenu_page('rrze-link-checker', __('Fehlerhafte Links', RRZE_LC_TEXTDOMAIN), __('Fehlerhafte Links', RRZE_LC_TEXTDOMAIN), 'manage_options', 'rrze-link-checker', array($this, 'links_page'));
+        $links_page = add_menu_page(__('Link-Checker', 'rrze-link-checker'), __('Link-Checker', 'rrze-link-checker'), 'manage_options', 'rrze-link-checker', array($this, 'links_page'), 'dashicons-editor-unlink');
+        add_submenu_page('rrze-link-checker', __('Fehlerhafte Links', 'rrze-link-checker'), __('Fehlerhafte Links', 'rrze-link-checker'), 'manage_options', 'rrze-link-checker', array($this, 'links_page'));
         add_action("load-{$links_page}", array($this, 'load_links_page'));
         add_action("load-{$links_page}", array($this, 'links_screen_options'));
 
-        add_submenu_page('rrze-link-checker', __('Einstellungen', RRZE_LC_TEXTDOMAIN), __('Einstellungen', RRZE_LC_TEXTDOMAIN), 'manage_options', 'rrze-link-checker-settings', array($this, 'settings_page'));
+        add_submenu_page('rrze-link-checker', __('Einstellungen', 'rrze-link-checker'), __('Einstellungen', 'rrze-link-checker'), 'manage_options', 'rrze-link-checker-settings', array($this, 'settings_page'));
         
         add_action('admin_notices', array($this, 'settings_admin_notices'), 99);
     }
     
     public function links_page() {
+        global $wpdb;
+        
+        $action = isset($_GET['action']) ? $_GET['action'] : '';
+        $id = isset($_GET['id']) ? absint($_GET['id']) : '';
+        if ($action == 'delete' && $id) {
+            $wpdb->delete($wpdb->prefix . RRZE_LC_ERRORS_TABLE, array('error_id' => $id), array('%d'));
+        }
+        
         $testListTable = new RRZE_LC_List_Table();
         $testListTable->prepare_items();
         ?>
         <div class="wrap">
-            <h2><?php _e('Fehlerhafte Links', RRZE_LC_TEXTDOMAIN); ?></h2>
-            <?php $testListTable->display() ?>
+            <h2><?php _e('Fehlerhafte Links', 'rrze-link-checker'); ?></h2>
+            <form method="get">
+                <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>">
+                <?php
+                $testListTable->search_box(__('Suche', 'rrze-link-checker'), 's');
+                ?>
+            </form>
+
+            <form method="get">
+                <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
+                <?php $testListTable->display(); ?>
+            </form>
         </div>
         <?php
     }
@@ -347,7 +365,7 @@ class RRZE_LC {
     public function settings_page() {
         ?>
         <div class="wrap">
-            <h2><?php echo esc_html(__('Link-Checker &rsaquo; Einstellungen', RRZE_LC_TEXTDOMAIN)); ?></h2>
+            <h2><?php echo esc_html(__('Link-Checker &rsaquo; Einstellungen', 'rrze-link-checker')); ?></h2>
             <form method="post">
                 <?php
                 settings_fields(RRZE_LC_OPTION_NAME . '_settings');
@@ -368,9 +386,9 @@ class RRZE_LC {
 
         $option = 'per_page';
         $args = array(
-            'label' => __('Einträge pro Seite:', RRZE_LC_TEXTDOMAIN),
+            'label' => __('Einträge pro Seite:', 'rrze-link-checker'),
             'default' => 20,
-            'option' => 'links_per_page'
+            'option' => 'rrze_lc_per_page'
         );
 
         add_screen_option($option, $args);
@@ -385,8 +403,8 @@ class RRZE_LC {
     
     public function links_settings() {
         add_settings_section(RRZE_LC_OPTION_NAME . '_settings_section', FALSE, '__return_false', RRZE_LC_OPTION_NAME . '_settings');
-        add_settings_field('post_types', __('Dokumentenart', RRZE_LC_TEXTDOMAIN), array($this, 'post_types_field'), RRZE_LC_OPTION_NAME . '_settings', RRZE_LC_OPTION_NAME . '_settings_section');
-        add_settings_field('post_status', __('Status', RRZE_LC_TEXTDOMAIN), array($this, 'post_status_field'), RRZE_LC_OPTION_NAME . '_settings', RRZE_LC_OPTION_NAME . '_settings_section');
+        add_settings_field('post_types', __('Dokumentenart', 'rrze-link-checker'), array($this, 'post_types_field'), RRZE_LC_OPTION_NAME . '_settings', RRZE_LC_OPTION_NAME . '_settings_section');
+        add_settings_field('post_status', __('Status', 'rrze-link-checker'), array($this, 'post_status_field'), RRZE_LC_OPTION_NAME . '_settings', RRZE_LC_OPTION_NAME . '_settings_section');
     }
     
     public function post_types_field() {
@@ -422,16 +440,16 @@ class RRZE_LC {
 
         if ($nonce) {
             if ($nonce && !wp_verify_nonce($nonce, "$option_page-options")) {
-                wp_die(__('Schummeln, was?', RRZE_LC_TEXTDOMAIN));
+                wp_die(__('Schummeln, was?', 'rrze-link-checker'));
             }
 
             if (!current_user_can('manage_options')) {
-                wp_die(__('Sie haben nicht die erforderlichen Rechte, um diese Aktion durchzuführen.', RRZE_LC_TEXTDOMAIN));
+                wp_die(__('Sie haben nicht die erforderlichen Rechte, um diese Aktion durchzuführen.', 'rrze-link-checker'));
             }
 
             if ($this->validate_settings()) {
                 do_action('rrze_lc_update_settings_task');
-                $updated = __('Einstellungen gespeichert.', RRZE_LC_TEXTDOMAIN);
+                $updated = __('Einstellungen gespeichert.', 'rrze-link-checker');
                 set_transient($this->transient_hash(), array('updated' => $updated), 30);
             }
 
@@ -451,7 +469,7 @@ class RRZE_LC {
 
         $input['post_types'] = $this->clean_post_type_options($input['post_types']);        
         if (empty($input['post_types'])) {
-            $errors[] = __('Der Dokumentenart-Feld ist erforderlich.', RRZE_LC_TEXTDOMAIN);
+            $errors[] = __('Der Dokumentenart-Feld ist erforderlich.', 'rrze-link-checker');
         }
 
         if (empty($input['post_status'])) {
@@ -460,7 +478,7 @@ class RRZE_LC {
 
         $input['post_status'] = $this->clean_post_status_options($input['post_status']);        
         if (empty($input['post_status'])) {
-            $errors[] = __('Der Status-Feld ist erforderlich.', RRZE_LC_TEXTDOMAIN);
+            $errors[] = __('Der Status-Feld ist erforderlich.', 'rrze-link-checker');
         }
         
         if(!empty($errors)) {
@@ -478,7 +496,7 @@ class RRZE_LC {
     
     public function dashboard_setup() {
         if (current_user_can('edit_others_posts')) {
-            wp_add_dashboard_widget('_rrze_link_checker_dashboard_widget', __('Link-Checker', RRZE_LC_TEXTDOMAIN), array($this, 'dashboard_widget'));
+            wp_add_dashboard_widget('_rrze_link_checker_dashboard_widget', __('Link-Checker', 'rrze-link-checker'), array($this, 'dashboard_widget'));
         }
     }
 
@@ -599,21 +617,21 @@ class RRZE_LC {
 
         if ($errors_count > 0) {
             $output .= sprintf(
-                "<p><a href='%s' title='" . __('Fehlerhafte Links anschauen', RRZE_LC_TEXTDOMAIN) . "'><strong>" .
-                _n('%d fehlerhafte Links gefunden.', '%d fehlerhafte Links gefunden.', $errors_count, RRZE_LC_TEXTDOMAIN) .
+                "<p><a href='%s' title='" . __('Fehlerhafte Links anschauen', 'rrze-link-checker') . "'><strong>" .
+                _n('%d fehlerhafte Links gefunden.', '%d fehlerhafte Links gefunden.', $errors_count, 'rrze-link-checker') .
                 " </strong></a></p>", admin_url('admin.php?page=rrze-link-checker'), $errors_count
             );
         } else {
-            $output .= sprintf('<p>%s</p>', __("Keine fehlerhaften Links gefunden.", RRZE_LC_TEXTDOMAIN));
+            $output .= sprintf('<p>%s</p>', __("Keine fehlerhaften Links gefunden.", 'rrze-link-checker'));
         }
 
         if ($queue_count > 0) {
             $output .= sprintf(
                 "<p>" .
-                _n('%d Dokument in der Warteschlange.', '%d Dokumente in der Warteschlange.', $queue_count, RRZE_LC_TEXTDOMAIN), $queue_count) .
+                _n('%d Dokument in der Warteschlange.', '%d Dokumente in der Warteschlange.', $queue_count, 'rrze-link-checker'), $queue_count) .
                 "</p>";
         } else {
-            $output .= sprintf('<p>%s</p>', __('Keine Dokumente in der Warteschlange.', RRZE_LC_TEXTDOMAIN));
+            $output .= sprintf('<p>%s</p>', __('Keine Dokumente in der Warteschlange.', 'rrze-link-checker'));
         }            
         ?>
         <div class="link-checker">
@@ -697,15 +715,15 @@ class RRZE_LC {
     }
     
     private function get_post_status_name($status) {
-        $status_name = __('Unbekannt', RRZE_LC_TEXTDOMAIN);
+        $status_name = __('Unbekannt', 'rrze-link-checker');
 
         $builtin_status = array(
-            'publish' => __('Veröffentlicht', RRZE_LC_TEXTDOMAIN),
-            'draft' => __('Entwurf', RRZE_LC_TEXTDOMAIN),
-            'future' => __('Geplant', RRZE_LC_TEXTDOMAIN),
-            'private' => __('Privat', RRZE_LC_TEXTDOMAIN),
-            'pending' => __('Ausstehender Review', RRZE_LC_TEXTDOMAIN),
-            'trash' => __('Papierkorb', RRZE_LC_TEXTDOMAIN),
+            'publish' => __('Veröffentlicht', 'rrze-link-checker'),
+            'draft' => __('Entwurf', 'rrze-link-checker'),
+            'future' => __('Geplant', 'rrze-link-checker'),
+            'private' => __('Privat', 'rrze-link-checker'),
+            'pending' => __('Ausstehender Review', 'rrze-link-checker'),
+            'trash' => __('Papierkorb', 'rrze-link-checker'),
         );
 
         if (array_key_exists($status, $builtin_status)) {
@@ -744,7 +762,7 @@ class RRZE_LC {
         $errors_count = count($errors_output);
         
         echo '<div class="error">' . PHP_EOL;
-        echo sprintf(_n('%d fehlerhafte Links gefunden:', '%d fehlerhafte Links gefunden:', $errors_count, RRZE_LC_TEXTDOMAIN), $errors_count) . '&nbsp;' . PHP_EOL;
+        echo sprintf(_n('%d fehlerhafte Links gefunden:', '%d fehlerhafte Links gefunden:', $errors_count, 'rrze-link-checker'), $errors_count) . '&nbsp;' . PHP_EOL;
         echo implode(', ', $errors_output) . '.' . PHP_EOL;
         echo '</div>' . PHP_EOL;
     }
