@@ -4,7 +4,7 @@
  * Plugin Name:     RRZE-Link-Checker
  * Plugin URI:      https://github.com/RRZE-Webteam/rrze-cf7-redirect
  * Description:     Überprüfung auf defekte Links.
- * Version:         1.3.0
+ * Version:         1.3.1
  * Author:          RRZE-Webteam
  * Author URI:      https://blogs.fau.de/webworking/
  * License:         GNU General Public License v2
@@ -325,8 +325,8 @@ class RRZE_LC {
 
         require(RRZE_LC_ROOT . '/rrze-lc-list-table.php');
         
-        $links_page = add_menu_page(__('Link-Checker', 'rrze-link-checker'), __('Link-Checker', 'rrze-link-checker'), 'manage_options', 'rrze-link-checker', array($this, 'links_page'), 'dashicons-editor-unlink');
-        add_submenu_page('rrze-link-checker', __('Fehlerhafte Links', 'rrze-link-checker'), __('Fehlerhafte Links', 'rrze-link-checker'), 'manage_options', 'rrze-link-checker', array($this, 'links_page'));
+        $links_page = add_menu_page(__('Link-Checker', 'rrze-link-checker'), __('Link-Checker', 'rrze-link-checker'), 'upload_files', 'rrze-link-checker', array($this, 'links_page'), 'dashicons-editor-unlink');
+        add_submenu_page('rrze-link-checker', __('Fehlerhafte Links', 'rrze-link-checker'), __('Fehlerhafte Links', 'rrze-link-checker'), 'upload_files', 'rrze-link-checker', array($this, 'links_page'));
         add_action("load-{$links_page}", array($this, 'load_links_page'));
         add_action("load-{$links_page}", array($this, 'links_screen_options'));
 
@@ -503,7 +503,7 @@ class RRZE_LC {
     }
     
     public function dashboard_setup() {
-        if (current_user_can('edit_others_posts')) {
+        if (current_user_can('upload_files')) {
             wp_add_dashboard_widget('_rrze_link_checker_dashboard_widget', __('Link-Checker', 'rrze-link-checker'), array($this, 'dashboard_widget'));
         }
     }
