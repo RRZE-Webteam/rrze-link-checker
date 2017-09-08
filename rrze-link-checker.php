@@ -223,6 +223,7 @@ class RRZE_LC {
             update_option(RRZE_LC_VERSION_OPTION_NAME, RRZE_LC_VERSION);
             $wpdb->query("ALTER TABLE " . $wpdb->prefix . RRZE_LC_ERRORS_TABLE . " ADD error_status VARCHAR(20) NULL DEFAULT NULL AFTER text, ADD INDEX error_status (error_status)");
             $wpdb->query("ALTER TABLE " . $wpdb->prefix . RRZE_LC_ERRORS_TABLE . " ADD http_status_code INT UNSIGNED NULL DEFAULT NULL AFTER text, ADD INDEX http_status_code (http_status_code)");
+            self::truncate_db_tables();
         }
     }
 
