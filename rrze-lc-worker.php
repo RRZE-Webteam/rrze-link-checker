@@ -29,7 +29,7 @@ class RRZE_LC_Worker {
         
         $posts = $wpdb->get_results(sprintf("SELECT ID FROM %s %s ORDER BY checked ASC", $wpdb->prefix . RRZE_LC_POSTS_TABLE, $where));
         
-        foreach ($posts as $post) {            
+        foreach ($posts as $post) {       
             self::check_urls($post->ID);           
         }
 
@@ -71,10 +71,12 @@ class RRZE_LC_Worker {
         $wpdb->delete(
             $wpdb->prefix . RRZE_LC_ERRORS_TABLE,
             array(
-                'post_id' => $post_id
+                'post_id' => $post_id,
+                'error_status' => NULL
             ),
             array(
-                '%d'
+                '%d',
+                '%s'
             )
         );
         
@@ -87,18 +89,27 @@ class RRZE_LC_Worker {
         foreach($errors as $error) {
             $error = (object) $error;
 
+            $status_query = $wpdb->prepare("SELECT 1 FROM " . $wpdb->prefix . RRZE_LC_ERRORS_TABLE . " WHERE url = %s AND error_status IS NOT NULL", $error->url);
+            if ($wpdb->get_row($status_query)) {
+                continue;
+            }
+
             $wpdb->insert( 
                 $wpdb->prefix . RRZE_LC_ERRORS_TABLE, 
                 array( 
                     'post_id' => $post_id, 
                     'post_title' => $error->post_title,
                     'url' => $error->url,
-                    'text' => $error->text
+                    'text' => $error->text,
+                    'http_status_code' => $error->http_status_code,
+                    'error_status' => $error->error_status
                 ), 
                 array( 
                     '%d', 
                     '%s',
                     '%s',
+                    '%s',
+                    '%d',
                     '%s'
                 ) 
             );               

@@ -42,7 +42,9 @@ class RRZE_LC_Helper {
                 $errors[] = array(
                     'url' => $url,
                     'text' => $text,
-                    'post_title' => $post->post_title
+                    'post_title' => $post->post_title,
+                    'http_status_code' => NULL,
+                    'error_status' => NULL
                 );
             } else {
                 $http_status_codes = self::http_status_codes();
@@ -53,7 +55,9 @@ class RRZE_LC_Helper {
                     $errors[] = array(
                         'url' => $url,
                         'text' => $text,
-                        'post_title' => $post->post_title
+                        'post_title' => $post->post_title,
+                        'http_status_code' => $code,
+                        'error_status' => NULL
                     );
                 }
             }

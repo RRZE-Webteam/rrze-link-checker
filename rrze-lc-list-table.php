@@ -5,13 +5,69 @@ class RRZE_LC_List_Table extends WP_List_Table {
     function __construct() {
         
         parent::__construct(array(
-            'singular' => 'link',
-            'plural' => 'links',
+            'singular' => 'lclink',
+            'plural' => 'lclinks',
             'ajax' => false
         ));
     }
 
-    function column_default($item, $column_name) {
+    protected function get_views() {
+        global $wpdb, $pagenow;
+        
+        $page = $_REQUEST['page'];
+        $view = isset($_REQUEST['view']) ? $_REQUEST['view'] : '';
+        $all_current = !$view ? 'class="current "' : '';
+        $ignore_current = $view == 'ignore' ? 'class="current "' : '';
+        $all_items = $wpdb->get_var("SELECT COUNT(*) FROM " . $wpdb->prefix . RRZE_LC_ERRORS_TABLE . " WHERE error_status IS NULL");
+        $ignore_items = $wpdb->get_var("SELECT COUNT(*) FROM " . $wpdb->prefix . RRZE_LC_ERRORS_TABLE . " WHERE error_status = 'ignore'");
+
+        $status_links = array(
+            'all' => '<a ' . $all_current . 'href="' . add_query_arg(array('page' => $page), admin_url($pagenow)) . '">' . __('Alle', 'rrze-link-checker') .' <span class="count">(' . ($all_items ? $all_items : 0) . ')</span></a>',
+            'ignore' => '<a ' . $ignore_current . 'href="' . add_query_arg(array('page' => $page, 'view' =>'ignore'), admin_url($pagenow)) . '">' . __('Ignoriert', 'rrze-link-checker') .' <span class="count">(' . ($ignore_items ? $ignore_items : 0) . ')</span></a>'
+        );
+        return $status_links;
+    }
+
+    protected function extra_tablenav($which) {
+        global $wpdb;
+
+        $view = isset($_REQUEST['view']) ? $_REQUEST['view'] : '';
+        $code_filter = isset($_GET['lc_code_filter']) ? $_GET['lc_code_filter'] : '';
+
+        if ($which == "top") {
+            ?>
+            <div class="alignleft actions bulkactions">
+            <?php
+            $http_status_codes = RRZE_LC_Helper::http_status_codes();
+            if($http_status_codes) :
+                ?>
+                <select name="lc_code_filter" class="lc-code-filter">
+                    <option value=""><?php _e('Alle Fehler', 'rrze-link-checker'); ?></option>
+                    <?php
+                    foreach($http_status_codes as $code => $title) {
+                        $selected = '';
+                        if($code_filter == $code ) {
+                            $selected = ' selected = "selected"';   
+                        }
+                    ?>
+                    <option value="<?php echo $code; ?>" <?php echo $selected; ?>><?php printf('%s - %s', $code, $title); ?></option>
+                    <?php
+                    }
+                    ?>
+                </select>
+                <?php if ($view) : ?>
+                <input type="hidden" name="view" value="<?php echo $view; ?>">
+                <?php endif; ?>
+                <input name="lc_filter_action" id="lc-filter-submit" class="button" value="<?php _e('Auswahl einschränken', 'rrze-link-checker'); ?>" type="submit">
+                <?php   
+            endif;
+            ?>  
+            </div>
+            <?php
+        }
+    }
+
+    protected function column_default($item, $column_name) {
         switch ($column_name) {
             case 'url':
             case 'text':
@@ -23,12 +79,18 @@ class RRZE_LC_List_Table extends WP_List_Table {
     }
 
     public function column_url($item) {
+        global $pagenow;
+
+        $view = isset($_REQUEST['view']) ? $_REQUEST['view'] : '';
         $page = $_REQUEST['page'];
         $id = $item['id'];
+
         // Build row actions
-        $actions = array(
-            'delete' => sprintf('<a href="?page=%1$s&action=%2$s&id=%3$s">%4$s</a>', $page, 'delete', $id, __('Löschen', 'rrze-link-checker')),
-        );
+        if ($view == 'ignore') {
+            $actions['unignore'] = '<a href="' . add_query_arg(array('page' => $page, 'action' =>'unignore', 'id' => $id, 'view' => 'ignore'), admin_url($pagenow)) . '">' . __('Wiederherstellen', 'rrze-link-checker') .'</a>';
+        } else {
+            $actions['ignore'] = '<a href="' . add_query_arg(array('page' => $page, 'action' =>'ignore', 'id' => $id), admin_url($pagenow)) . '">' . __('Ignorieren', 'rrze-link-checker') .'</a>';
+        }
 
         // Return the title contents
         return sprintf('%1$s %2$s',
@@ -45,7 +107,7 @@ class RRZE_LC_List_Table extends WP_List_Table {
         );
     }
     
-    function get_columns() {
+    public function get_columns() {
         $columns = array(
             'cb' => '<input type="checkbox" />', // Render a checkbox instead of text
             'url' => __('Link-Url', 'rrze-link-checker'),
@@ -55,36 +117,52 @@ class RRZE_LC_List_Table extends WP_List_Table {
         return $columns;
     }
 
-    function get_sortable_columns() {
+    protected function get_sortable_columns() {
         $sortable_columns = array(
             'text' => array('text', false)
         );
         return $sortable_columns;
     }
 
-    public function get_bulk_actions() {
-        $actions = array(
-            'delete' => __('Löschen', 'rrze-link-checker')
-        );
+    protected function get_bulk_actions() {
+        $view = isset($_REQUEST['view']) ? $_REQUEST['view'] : '';
+
+        // Build drop-down bulk actions list
+        if ($view == 'ignore') {
+            $actions['unignore'] = __('Wiederherstellen', 'rrze-link-checker');
+        } else {
+            $actions['ignore'] = __('Ignorieren', 'rrze-link-checker');
+        }
+
         return $actions;
     }
     
     public function process_bulk_action() {
-        global $wpdb;
+        global $wpdb, $pagenow;
 
-        if ('delete' === $this->current_action()) {
-            $links = isset($_GET['link']) ? (array) $_GET['link'] : array();
+        $page = $_REQUEST['page'];
+        $links = isset($_GET['lclink']) ? (array) $_GET['lclink'] : array();
+
+        if ('ignore' === $this->current_action()) {            
             if (!empty($links)) {
                 foreach ($links as $id) {
-                    $wpdb->delete($wpdb->prefix . RRZE_LC_ERRORS_TABLE, array('error_id' => $id), array('%d'));
+                    $wpdb->update($wpdb->prefix . RRZE_LC_ERRORS_TABLE, array('error_status' => 'ignore'), array('error_id' => $id), array('%s'), array('%d'));
                 }
-                wp_redirect(admin_url('admin.php?page=' . $_REQUEST['page']));
+                wp_redirect(add_query_arg(array('page' => $page), admin_url($pagenow)));
+                exit;
+            }            
+        } elseif ('unignore' === $this->current_action()) {
+            if (!empty($links)) {
+                foreach ($links as $id) {
+                    $wpdb->update($wpdb->prefix . RRZE_LC_ERRORS_TABLE, array('error_status' => NULL), array('error_id' => $id), array('%s'), array('%d'));
+                }
+                wp_redirect(add_query_arg(array('page' => $page, 'view' =>'ignore'), admin_url($pagenow)));
                 exit;
             }
         }
     }
     
-    function prepare_items() {
+    public function prepare_items() {
         global $wpdb;
         
         $per_page = $this->get_items_per_page('rrze_lc_per_page', 20);
@@ -99,10 +177,17 @@ class RRZE_LC_List_Table extends WP_List_Table {
 
         $current_page = $this->get_pagenum();
         
-        $search = isset($_GET['s']) ? $_GET['s'] : '';
-               
-        $where = $search ? $wpdb->prepare("WHERE post_title LIKE %s OR url LIKE %s OR text LIKE %s", '%' . $search . '%', '%' . $search . '%', '%' . $search . '%') : '';
+        $where = "WHERE 1";
+
+        $search = isset($_GET['s']) ? $_GET['s'] : '';                
+        $where .= $search ? $wpdb->prepare(" AND post_title LIKE %s OR url LIKE %s OR text LIKE %s", '%' . $search . '%', '%' . $search . '%', '%' . $search . '%') : '';
         
+        $view = isset($_REQUEST['view']) ? $_REQUEST['view'] : '';
+        $where .= $view ? $wpdb->prepare(" AND error_status = %s", $view) : " AND error_status IS NULL";
+
+        $code_filter = isset($_GET['lc_code_filter']) ? absint($_GET['lc_code_filter']) : '';
+        $where .= $code_filter ? $wpdb->prepare(" AND http_status_code = %d", $code_filter) : '';
+
         $total_items = $wpdb->get_var(sprintf("SELECT COUNT(*) FROM %s %s", $wpdb->prefix . RRZE_LC_ERRORS_TABLE, $where));
         $total_pages = ceil($total_items / $per_page);
         

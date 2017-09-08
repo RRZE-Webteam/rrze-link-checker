@@ -1,27 +1,16 @@
 <?php
-/**
- * Plugin Name: RRZE-Link-Checker
- * Description: Überprüfung auf defekte Links.
- * Version: 1.2.0
- * Author: Rolf v. d. Forst
- * Author URI: http://blogs.fau.de/webworking/
- * License: GPLv2 or later
- */
 
-/*
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+/**
+ * Plugin Name:     RRZE-Link-Checker
+ * Plugin URI:      https://github.com/RRZE-Webteam/rrze-cf7-redirect
+ * Description:     Überprüfung auf defekte Links.
+ * Version:         1.3.0
+ * Author:          RRZE-Webteam
+ * Author URI:      https://blogs.fau.de/webworking/
+ * License:         GNU General Public License v2
+ * License URI:     http://www.gnu.org/licenses/gpl-2.0.html
+ * Domain Path:     /languages
+ * Text Domain:     rrze-link-checker
  */
 
 require_once(dirname(__FILE__) . '/rrze-lc-constants.php');
@@ -108,7 +97,9 @@ class RRZE_LC {
         self::system_requirements($networkwide);
         
         // Datenbanktabellen erstellen.
-        self::create_db_tables();        
+        self::create_db_tables();
+        
+        update_option(RRZE_LC_VERSION_OPTION_NAME, RRZE_LC_VERSION);
     }
 
     /*
@@ -171,8 +162,12 @@ class RRZE_LC {
                 post_title text NOT NULL,               
                 url text(250) DEFAULT '' NOT NULL,
                 text text(250) DEFAULT '' NOT NULL,
+                http_status_code int(10) UNSIGNED DEFAULT NULL,
+                error_status varchar(20) DEFAULT NULL,
                 PRIMARY KEY  (error_id),
-                KEY post_id (post_id)) %s;", $wpdb->prefix . RRZE_LC_ERRORS_TABLE, $charset_collate));
+                KEY post_id (post_id),
+                KEY http_status_code (http_status_code),
+                KEY error_status (error_status)) %s;", $wpdb->prefix . RRZE_LC_ERRORS_TABLE, $charset_collate));
     }
 
     public static function setup_db_tables() {
@@ -222,8 +217,12 @@ class RRZE_LC {
     }
         
     public static function update_version() {
-        if (get_option(RRZE_LC_VERSION_OPTION_NAME, NULL) != RRZE_LC_VERSION) {
+        global $wpdb;
+
+        if (version_compare(get_option(RRZE_LC_VERSION_OPTION_NAME, 0), '1.3.0', '<')) {
             update_option(RRZE_LC_VERSION_OPTION_NAME, RRZE_LC_VERSION);
+            $wpdb->query("ALTER TABLE " . $wpdb->prefix . RRZE_LC_ERRORS_TABLE . " ADD error_status VARCHAR(20) NULL DEFAULT NULL AFTER text, ADD INDEX error_status (error_status)");
+            $wpdb->query("ALTER TABLE " . $wpdb->prefix . RRZE_LC_ERRORS_TABLE . " ADD http_status_code INT UNSIGNED NULL DEFAULT NULL AFTER text, ADD INDEX http_status_code (http_status_code)");
         }
     }
 
@@ -332,31 +331,37 @@ class RRZE_LC {
         
         add_action('admin_notices', array($this, 'settings_admin_notices'), 99);
     }
-    
+
     public function links_page() {
-        global $wpdb;
+        global $wpdb, $pagenow;
         
+        $page = $_REQUEST['page'];
         $action = isset($_GET['action']) ? $_GET['action'] : '';
         $id = isset($_GET['id']) ? absint($_GET['id']) : '';
-        if ($action == 'delete' && $id) {
-            $wpdb->delete($wpdb->prefix . RRZE_LC_ERRORS_TABLE, array('error_id' => $id), array('%d'));
+
+        if ($action == 'ignore' && $id) {
+            $wpdb->update($wpdb->prefix . RRZE_LC_ERRORS_TABLE, array('error_status' => 'ignore'), array('error_id' => $id), array('%s'), array('%d'));
+        } elseif ($action == 'unignore' && $id) {
+            $wpdb->update($wpdb->prefix . RRZE_LC_ERRORS_TABLE, array('error_status' => NULL), array('error_id' => $id), array('%s'), array('%d'));
+            wp_redirect(add_query_arg(array('page' => $page, 'view' =>'ignore'), admin_url($pagenow)));
+            exit;
         }
-        
-        $testListTable = new RRZE_LC_List_Table();
-        $testListTable->prepare_items();
+
+        $list_table = new RRZE_LC_List_Table();
+        $list_table->prepare_items();
         ?>
         <div class="wrap">
             <h2><?php _e('Fehlerhafte Links', 'rrze-link-checker'); ?></h2>
             <form method="get">
                 <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>">
                 <?php
-                $testListTable->search_box(__('Suche', 'rrze-link-checker'), 's');
+                $list_table->search_box(__('Suche', 'rrze-link-checker'), 's');
                 ?>
             </form>
-
+            <?php $list_table->views(); ?>
             <form method="get">
                 <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
-                <?php $testListTable->display(); ?>
+                <?php $list_table->display(); ?>
             </form>
         </div>
         <?php
@@ -613,7 +618,7 @@ class RRZE_LC {
         
         $queue_count = (int) $wpdb->get_var(sprintf("SELECT COUNT(*) FROM %s %s", $wpdb->prefix . RRZE_LC_POSTS_TABLE, $where));
 
-        $errors_count = (int) $wpdb->get_var(sprintf("SELECT COUNT(*) FROM %s", $wpdb->prefix . RRZE_LC_ERRORS_TABLE));
+        $errors_count = (int) $wpdb->get_var(sprintf("SELECT COUNT(*) FROM %s WHERE error_status IS NULL", $wpdb->prefix . RRZE_LC_ERRORS_TABLE));
 
         if ($errors_count > 0) {
             $output .= sprintf(
