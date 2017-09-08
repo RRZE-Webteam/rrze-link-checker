@@ -222,8 +222,10 @@ class RRZE_LC {
         if (version_compare(get_option(RRZE_LC_VERSION_OPTION_NAME, 0), '1.3.0', '<')) {
             update_option(RRZE_LC_VERSION_OPTION_NAME, RRZE_LC_VERSION);
             $wpdb->query("ALTER TABLE " . $wpdb->prefix . RRZE_LC_ERRORS_TABLE . " ADD error_status VARCHAR(20) NULL DEFAULT NULL AFTER text, ADD INDEX error_status (error_status)");
-            $wpdb->query("ALTER TABLE " . $wpdb->prefix . RRZE_LC_ERRORS_TABLE . " ADD http_status_code INT UNSIGNED NULL DEFAULT NULL AFTER text, ADD INDEX http_status_code (http_status_code)");
-            self::truncate_db_tables();
+            $wpdb->query("ALTER TABLE " . $wpdb->prefix . RRZE_LC_ERRORS_TABLE . " ADD http_status_code INT UNSIGNED NULL DEFAULT NULL AFTER text, ADD INDEX http_status_code (http_status_code)");           
+            delete_option(RRZE_LC_OPTION_NAME_CRON_TIMESTAMP);
+            delete_option(RRZE_LC_OPTION_NAME_SCAN_TIMESTAMP);
+            self::truncate_db_tables();           
         }
     }
 
