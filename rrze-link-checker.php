@@ -4,7 +4,7 @@
  * Plugin Name:     RRZE-Link-Checker
  * Plugin URI:      https://github.com/RRZE-Webteam/rrze-cf7-redirect
  * Description:     Überprüfung auf defekte Links.
- * Version:         1.3.1
+ * Version:         1.4.0
  * Author:          RRZE-Webteam
  * Author URI:      https://blogs.fau.de/webworking/
  * License:         GNU General Public License v2
@@ -237,6 +237,7 @@ class RRZE_LC {
         $options = array(
             'post_types' => array('post', 'page'),
             'post_status' => array('publish'),
+            'http_request_timeout' => 5
         );
 
         return apply_filters('rrze_lc_default_options', $options);
@@ -264,8 +265,10 @@ class RRZE_LC {
             do_action('rrze_lc_scan_task');
         }
     }
-
+    
     public function async_task() {
+        add_filter('http_request_timeout', array($this, 'http_request_timeout'));
+        
         $scan_task = new RRZE_LC_Scan_Task();
         add_action('wp_async_rrze_lc_scan_task', array($this, 'scan_task'));
         
@@ -299,6 +302,10 @@ class RRZE_LC {
             echo '<br>';
         }
         
+    }
+    
+    public function http_request_timeout($timeout) {
+        return self::$options->http_request_timeout;
     }
     
     public function options_link_checker() {
@@ -413,6 +420,7 @@ class RRZE_LC {
         add_settings_section(RRZE_LC_OPTION_NAME . '_settings_section', FALSE, '__return_false', RRZE_LC_OPTION_NAME . '_settings');
         add_settings_field('post_types', __('Dokumentenart', 'rrze-link-checker'), array($this, 'post_types_field'), RRZE_LC_OPTION_NAME . '_settings', RRZE_LC_OPTION_NAME . '_settings_section');
         add_settings_field('post_status', __('Status', 'rrze-link-checker'), array($this, 'post_status_field'), RRZE_LC_OPTION_NAME . '_settings', RRZE_LC_OPTION_NAME . '_settings_section');
+        add_settings_field('http_request_timeout', __('HTTP-Anfrage-Timeout', 'rrze-link-checker'), array($this, 'http_request_timeout_field'), RRZE_LC_OPTION_NAME . '_settings', RRZE_LC_OPTION_NAME . '_settings_section');        
     }
     
     public function post_types_field() {
@@ -436,6 +444,15 @@ class RRZE_LC {
         <?php endforeach;
     }
 
+    public static function http_request_timeout_field() {
+        ?>
+        <label for="rrze-lc-http-request-timeout">
+            <input type="number" min="5" max="30" step="1" name="<?php echo RRZE_LC_OPTION_NAME; ?>[http_request_timeout]" value="<?php echo self::$options->http_request_timeout; ?>" class="small-text">
+            <?php echo esc_html(_nx('Sekunde', 'Sekunden', self::$options->http_request_timeout, 'rrze-lc-http-request-timeout', 'rrze-link-checker')) ?>
+        </label>
+        <?php
+    }
+    
     public function submit_settings() {
         $page = $this->get_param('page');
 
@@ -489,6 +506,13 @@ class RRZE_LC {
             $errors[] = __('Der Status-Feld ist erforderlich.', 'rrze-link-checker');
         }
         
+        if (empty($input['http_request_timeout'])) {
+            $input['http_request_timeout'] = 5;
+        }
+        
+        $http_request_timeout = absint($input['http_request_timeout']);
+        $input['http_request_timeout'] = $http_request_timeout < 5 || $http_request_timeout > 30 ? 5 : $http_request_timeout;
+                
         if(!empty($errors)) {
             set_transient($this->transient_hash(), array('error' => $errors), 30);
             return FALSE;
@@ -496,6 +520,7 @@ class RRZE_LC {
 
         self::$options->post_types = $input['post_types'];
         self::$options->post_status = $input['post_status'];
+        self::$options->http_request_timeout = $input['http_request_timeout'];
         
         update_option(RRZE_LC_OPTION_NAME, (array) self::$options);
 
