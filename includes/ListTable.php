@@ -31,8 +31,8 @@ class ListTable extends WP_List_Table {
         $ignore_items = $wpdb->get_var("SELECT COUNT(*) FROM " . $wpdb->prefix . DB::getErrorsTableName() . " WHERE error_status = 'ignore'");
 
         $status_links = array(
-            'all' => '<a ' . $all_current . 'href="' . add_query_arg(array('page' => $page), admin_url($pagenow)) . '">' . __('Alle', 'rrze-link-checker') .' <span class="count">(' . ($all_items ? $all_items : 0) . ')</span></a>',
-            'ignore' => '<a ' . $ignore_current . 'href="' . add_query_arg(array('page' => $page, 'view' =>'ignore'), admin_url($pagenow)) . '">' . __('Ignoriert', 'rrze-link-checker') .' <span class="count">(' . ($ignore_items ? $ignore_items : 0) . ')</span></a>'
+            'all' => '<a ' . $all_current . 'href="' . add_query_arg(array('page' => $page), admin_url($pagenow)) . '">' . __('All', 'rrze-link-checker') .' <span class="count">(' . ($all_items ? $all_items : 0) . ')</span></a>',
+            'ignore' => '<a ' . $ignore_current . 'href="' . add_query_arg(array('page' => $page, 'view' =>'ignore'), admin_url($pagenow)) . '">' . __('Ignored', 'rrze-link-checker') .' <span class="count">(' . ($ignore_items ? $ignore_items : 0) . ')</span></a>'
         );
         return $status_links;
     }
@@ -51,7 +51,7 @@ class ListTable extends WP_List_Table {
             if($http_status_codes) :
                 ?>
                 <select name="lc_code_filter" class="lc-code-filter">
-                    <option value=""><?php _e('Alle Fehler', 'rrze-link-checker'); ?></option>
+                    <option value=""><?php _e('All Errors', 'rrze-link-checker'); ?></option>
                     <?php
                     foreach($http_status_codes as $code => $title) {
                         $selected = '';
@@ -67,7 +67,7 @@ class ListTable extends WP_List_Table {
                 <?php if ($view) : ?>
                 <input type="hidden" name="view" value="<?php echo $view; ?>">
                 <?php endif; ?>
-                <input name="lc_filter_action" id="lc-filter-submit" class="button" value="<?php _e('Auswahl einschränken', 'rrze-link-checker'); ?>" type="submit">
+                <input name="lc_filter_action" id="lc-filter-submit" class="button" value="<?php _e('Filter', 'rrze-link-checker'); ?>" type="submit">
                 <?php
             endif;
             ?>
@@ -96,9 +96,9 @@ class ListTable extends WP_List_Table {
 
         // Build row actions
         if ($view == 'ignore') {
-            $actions['unignore'] = '<a href="' . add_query_arg(array('page' => $page, 'action' =>'unignore', 'id' => $id, 'view' => 'ignore'), admin_url($pagenow)) . '">' . __('Wiederherstellen', 'rrze-link-checker') .'</a>';
+            $actions['unignore'] = '<a href="' . add_query_arg(array('page' => $page, 'action' =>'unignore', 'id' => $id, 'view' => 'ignore'), admin_url($pagenow)) . '">' . __('Unignore', 'rrze-link-checker') .'</a>';
         } else {
-            $actions['ignore'] = '<a href="' . add_query_arg(array('page' => $page, 'action' =>'ignore', 'id' => $id), admin_url($pagenow)) . '">' . __('Ignorieren', 'rrze-link-checker') .'</a>';
+            $actions['ignore'] = '<a href="' . add_query_arg(array('page' => $page, 'action' =>'ignore', 'id' => $id), admin_url($pagenow)) . '">' . __('Ignore', 'rrze-link-checker') .'</a>';
         }
 
         // Return the title contents
@@ -119,9 +119,9 @@ class ListTable extends WP_List_Table {
     public function get_columns() {
         $columns = array(
             'cb' => '<input type="checkbox" />', // Render a checkbox instead of text
-            'url' => __('Link-Url', 'rrze-link-checker'),
-            'text' => __('Fehlermeldung', 'rrze-link-checker'),
-            'source' => __('Dokument', 'rrze-link-checker')
+            'url' => __('Link Url', 'rrze-link-checker'),
+            'text' => __('Error message', 'rrze-link-checker'),
+            'source' => __('Document', 'rrze-link-checker')
         );
         return $columns;
     }
@@ -138,9 +138,9 @@ class ListTable extends WP_List_Table {
 
         // Build drop-down bulk actions list
         if ($view == 'ignore') {
-            $actions['unignore'] = __('Wiederherstellen', 'rrze-link-checker');
+            $actions['unignore'] = __('Unignore', 'rrze-link-checker');
         } else {
-            $actions['ignore'] = __('Ignorieren', 'rrze-link-checker');
+            $actions['ignore'] = __('Ignore', 'rrze-link-checker');
         }
 
         return $actions;

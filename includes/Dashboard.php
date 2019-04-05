@@ -19,7 +19,7 @@ class Dashboard
         if (current_user_can('upload_files')) {
             wp_add_dashboard_widget(
                 '_rrze_link_checker_dashboard_widget',
-                __('Link-Checker', 'rrze-link-checker'),
+                __('Link Checker', 'rrze-link-checker'),
                 [$this, 'dashboardWidget']
             );
         }
@@ -74,10 +74,10 @@ class Dashboard
 
         if ($errorsCount > 0) {
             $output .= sprintf(
-                '<p><a href="%1$s" title="' . __('Fehlerhafte Links anschauen', 'rrze-link-checker') . '"><strong>%2$s</strong></a></p>',
+                '<p><a href="%1$s" title="' . __('View broken links', 'rrze-link-checker') . '"><strong>%2$s</strong></a></p>',
                 admin_url('admin.php?page=rrze-link-checker'),
                 sprintf(
-                    _n('%d fehlerhafte Links gefunden.', '%d fehlerhafte Links gefunden.',
+                    _n('Found %d broken link.', 'Found %d broken links.',
                     $errorsCount,
                     'rrze-link-checker'
                     ),
@@ -87,7 +87,7 @@ class Dashboard
         } else {
             $output .= sprintf(
                 '<p>%s</p>',
-                __('Keine fehlerhaften Links gefunden.', 'rrze-link-checker')
+                __('No broken links found.', 'rrze-link-checker')
             );
         }
 
@@ -96,8 +96,8 @@ class Dashboard
                 '<p>%s</p>',
                 sprintf(
                     _n(
-                        '%d Dokument in der Warteschlange.',
-                        '%d Dokumente in der Warteschlange.',
+                        '%d document in the work queue.',
+                        '%d documents in the work queue.',
                         $queueCount,
                         'rrze-link-checker'
                     ),
@@ -107,7 +107,7 @@ class Dashboard
         } else {
             $output .= sprintf(
                 '<p>%s</p>',
-                __('Keine Dokumente in der Warteschlange.', 'rrze-link-checker')
+                __('No documents in the work queue.', 'rrze-link-checker')
             );
         } ?>
         <div class="link-checker">

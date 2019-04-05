@@ -70,8 +70,8 @@ class Settings
     public function adminMenuPage()
     {
         $this->settingsScreenId = add_menu_page(
-            __('Link-Checker', 'rrze-link-checker'),
-            __('Link-Checker', 'rrze-link-checker'),
+            __('Link Checker', 'rrze-link-checker'),
+            __('Link Checker', 'rrze-link-checker'),
             'publish_posts',
             'rrze-link-checker',
             [
@@ -83,8 +83,8 @@ class Settings
 
         add_submenu_page(
             'rrze-link-checker',
-            __('Fehlerhafte Links', 'rrze-link-checker'),
-            __('Fehlerhafte Links', 'rrze-link-checker'),
+            __('Broken Links', 'rrze-link-checker'),
+            __('Broken Links', 'rrze-link-checker'),
             'publish_posts',
             'rrze-link-checker',
             [
@@ -95,8 +95,8 @@ class Settings
 
         add_submenu_page(
             'rrze-link-checker',
-            __('Einstellungen', 'rrze-link-checker'),
-            __('Einstellungen', 'rrze-link-checker'),
+            __('Settings', 'rrze-link-checker'),
+            __('Settings', 'rrze-link-checker'),
             'manage_options',
             'rrze-link-checker-settings',
             [
@@ -162,11 +162,11 @@ class Settings
         $listTable = new ListTable();
         $listTable->prepare_items(); ?>
         <div class="wrap">
-            <h2><?php _e('Fehlerhafte Links', 'rrze-link-checker'); ?></h2>
+            <h2><?php _e('Broken Links', 'rrze-link-checker'); ?></h2>
             <form method="get">
                 <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>">
                 <?php
-                $listTable->search_box(__('Suche', 'rrze-link-checker'), 's'); ?>
+                $listTable->search_box(__('Search', 'rrze-link-checker'), 's'); ?>
             </form>
             <?php $listTable->views(); ?>
             <form method="get">
@@ -181,7 +181,7 @@ class Settings
     {
         ?>
         <div class="wrap">
-            <h2><?php echo esc_html(__('Link-Checker &rsaquo; Einstellungen', 'rrze-link-checker')); ?></h2>
+            <h2><?php echo esc_html(__('Settings', 'rrze-link-checker')); ?></h2>
             <form method="post">
                 <?php
                 settings_fields($this->optionName . '_settings');
@@ -203,7 +203,7 @@ class Settings
 
         add_settings_field(
             'post_types',
-            __('Dokumentenart', 'rrze-link-checker'),
+            __('Document type', 'rrze-link-checker'),
             [$this, 'post_types_field'],
             $this->optionName . '_settings',
             $this->optionName . '_settings_section'
@@ -219,7 +219,7 @@ class Settings
 
         add_settings_field(
             'http_request_timeout',
-            __('HTTP-Anfrage-Timeout', 'rrze-link-checker'),
+            __('HTTP Request Timout', 'rrze-link-checker'),
             [$this, 'http_request_timeout_field'],
             $this->optionName . '_settings',
             $this->optionName . '_settings_section'
@@ -252,7 +252,7 @@ class Settings
         ?>
         <label for="rrze-lc-http-request-timeout">
             <input type="number" min="5" max="30" step="1" name="<?php echo $this->optionName; ?>[http_request_timeout]" value="<?php echo $this->options->http_request_timeout; ?>" class="small-text">
-            <?php echo esc_html(_nx('Sekunde', 'Sekunden', $this->options->http_request_timeout, 'rrze-lc-http-request-timeout', 'rrze-link-checker')) ?>
+            <?php echo esc_html(_nx('second', 'seconds', $this->options->http_request_timeout, 'rrze-lc-http-request-timeout', 'rrze-link-checker')) ?>
         </label>
         <?php
     }
@@ -278,7 +278,7 @@ class Settings
 
         if ($this->validateSettings()) {
             do_action('rrze_lc_rescan_task');
-            $updated = __('Einstellungen gespeichert.', 'rrze-link-checker');
+            $updated = __('Settings saved.', 'rrze-link-checker');
             set_transient(
                 $this->getTransientHash(),
                 ['updated' => $updated],
@@ -301,7 +301,7 @@ class Settings
 
         $postTypes = $this->cleanPostTypesOption($input['post_types']);
         if (empty($postTypes)) {
-            $errors[] = __('Der Dokumentenart-Feld ist erforderlich.', 'rrze-link-checker');
+            $errors[] = __('The document type field is required.', 'rrze-link-checker');
         }
 
         if (empty($input['post_status'])) {
@@ -310,7 +310,7 @@ class Settings
 
         $postStatus = $this->cleanPostStatusOption($input['post_status']);
         if (empty($postStatus)) {
-            $errors[] = __('Der Status-Feld ist erforderlich.', 'rrze-link-checker');
+            $errors[] = __('The status field is required.', 'rrze-link-checker');
         }
 
         if (empty($input['http_request_timeout'])) {
@@ -484,15 +484,15 @@ class Settings
 
     protected function getPostStatusName($status)
     {
-        $statusName = __('Unbekannt', 'rrze-link-checker');
+        $statusName = __('Unknown', 'rrze-link-checker');
 
         $builtinStatus = [
-            'publish' => __('Veröffentlicht', 'rrze-link-checker'),
-            'draft' => __('Entwurf', 'rrze-link-checker'),
-            'future' => __('Geplant', 'rrze-link-checker'),
-            'private' => __('Privat', 'rrze-link-checker'),
-            'pending' => __('Ausstehender Review', 'rrze-link-checker'),
-            'trash' => __('Papierkorb', 'rrze-link-checker'),
+            'publish' => __('Published', 'rrze-link-checker'),
+            'draft' => __('Draft', 'rrze-link-checker'),
+            'future' => __('Scheduled', 'rrze-link-checker'),
+            'private' => __('Private', 'rrze-link-checker'),
+            'pending' => __('Pending Review', 'rrze-link-checker'),
+            'trash' => __('Trash', 'rrze-link-checker'),
         ];
 
         if (array_key_exists($status, $builtinStatus)) {

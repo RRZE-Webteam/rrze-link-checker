@@ -44,7 +44,7 @@ class Util
             if (is_wp_error($response)) {
                 $curlErrorCodes = self::curlErrorCodes();
                 preg_match('/\d+/', $response->get_error_message(), $matches);
-                $text = !empty($matches[0]) && isset($curlErrorCodes[$matches[0]]) ? $curlErrorCodes[$matches[0]] : __('Unbekannt', 'rrze-link-checker');
+                $text = !empty($matches[0]) && isset($curlErrorCodes[$matches[0]]) ? $curlErrorCodes[$matches[0]] : __('Unknown', 'rrze-link-checker');
 
                 $errors[] = [
                     'url' => $url,
@@ -58,7 +58,7 @@ class Util
                 $code = (int) wp_remote_retrieve_response_code($response);
 
                 if ($code >= 400 && $code != 405) {
-                    $text = isset($httpStatusCodes[$code]) ? sprintf('%1$s %2$s', $code, $httpStatusCodes[$code]) : __('Unbekannt', 'rrze-link-checker');
+                    $text = isset($httpStatusCodes[$code]) ? sprintf('%1$s %2$s', $code, $httpStatusCodes[$code]) : __('Unknown', 'rrze-link-checker');
                     $errors[] = [
                         'url' => $url,
                         'text' => $text,
