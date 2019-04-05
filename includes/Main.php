@@ -16,8 +16,7 @@ class Main
      * [protected description]
      * @var integer
      */
-    //protected static $cronInterval = HOUR_IN_SECONDS;
-    protected static $cronInterval = 10;
+    protected static $cronInterval = HOUR_IN_SECONDS;
 
     /**
      * Main-Klasse wird instanziiert.
