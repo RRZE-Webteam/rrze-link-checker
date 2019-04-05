@@ -1,32 +1,39 @@
 <?php
 
-class RRZE_LC_Helper {
-    
-    public static function check_urls($post_id = NULL) {
-        if (empty($post_id)) {
-            return FALSE;
+namespace RRZE\LinkChecker;
+
+defined('ABSPATH') || exit;
+
+use \DOMDocument;
+
+class Util
+{
+    public static function checkUrls($postId = null)
+    {
+        if (empty($postId)) {
+            return false;
         }
 
-        $post_id = absint($post_id);
-        
-        $post = get_post($post_id);
+        $postId = absint($postId);
 
-        if (empty($post) OR empty($post->post_content)) {
-            return FALSE;
+        $post = get_post($postId);
+
+        if (empty($post) or empty($post->post_content)) {
+            return false;
         }
 
-        if (!$urls = self::extract_urls($post->post_content)) {
-            return FALSE;
+        if (!$urls = self::extractUrls($post->post_content)) {
+            return false;
         }
-        
-        $errors = array();
+
+        $errors = [];
 
         foreach ($urls as $url) {
             if ($hash = parse_url($url, PHP_URL_FRAGMENT)) {
                 $url = str_replace('#' . $hash, '', $url);
             }
 
-            $url = esc_url_raw($url, array('http', 'https'));
+            $url = esc_url_raw($url, ['http', 'https']);
 
             if (empty($url)) {
                 continue;
@@ -35,51 +42,52 @@ class RRZE_LC_Helper {
             $response = wp_safe_remote_head($url);
 
             if (is_wp_error($response)) {
-                $curl_error_codes = self::curl_error_codes();
+                $curlErrorCodes = self::curlErrorCodes();
                 preg_match('/\d+/', $response->get_error_message(), $matches);
-                $text = !empty($matches[0]) && isset($curl_error_codes[$matches[0]]) ? $curl_error_codes[$matches[0]] : __('Unbekannt', 'rrze-link-checker');
-                
-                $errors[] = array(
+                $text = !empty($matches[0]) && isset($curlErrorCodes[$matches[0]]) ? $curlErrorCodes[$matches[0]] : __('Unknown', 'rrze-link-checker');
+
+                $errors[] = [
                     'url' => $url,
                     'text' => $text,
                     'post_title' => $post->post_title,
-                    'http_status_code' => NULL,
-                    'error_status' => NULL
-                );
+                    'http_status_code' => null,
+                    'error_status' => null
+                ];
             } else {
-                $http_status_codes = self::http_status_codes();
+                $httpStatusCodes = self::httpStatusCodes();
                 $code = (int) wp_remote_retrieve_response_code($response);
-                
+
                 if ($code >= 400 && $code != 405) {
-                    $text = isset($http_status_codes[$code]) ? sprintf('%s - %s', $code, $http_status_codes[$code]) : __('Unbekannt', 'rrze-link-checker');
-                    $errors[] = array(
+                    $text = isset($httpStatusCodes[$code]) ? sprintf('%1$s %2$s', $code, $httpStatusCodes[$code]) : __('Unknown', 'rrze-link-checker');
+                    $errors[] = [
                         'url' => $url,
                         'text' => $text,
                         'post_title' => $post->post_title,
                         'http_status_code' => $code,
-                        'error_status' => NULL
-                    );
+                        'error_status' => null
+                    ];
                 }
             }
         }
 
         if (empty($errors)) {
-            return FALSE;
+            return false;
         }
 
         return $errors;
     }
-    
-    public static function extract_urls($html) {
+
+    public static function extractUrls($html)
+    {
         if (empty($html)) {
-            return FALSE;
+            return false;
         }
-        
-        $urls = array();
+
+        $urls = [];
 
         // Disable DOMDocument warnings due to invalid HTML
         libxml_use_internal_errors(true);
-        
+
         $doc = new DOMDocument();
         $doc->loadHTML('<?xml encoding="UTF-8">' . $html);
 
@@ -126,11 +134,12 @@ class RRZE_LC_Helper {
         }
 
         libxml_clear_errors();
-        
+
         return $urls;
     }
-    
-    public static function get_param($param, $default = '') {
+
+    public static function getParam($param, $default = '')
+    {
         if (isset($_POST[$param])) {
             return $_POST[$param];
         }
@@ -141,22 +150,27 @@ class RRZE_LC_Helper {
 
         return $default;
     }
-    
-    public static function options_url($atts = array()) {
+
+    public static function optionsUrl($atts = [])
+    {
         $atts = array_merge(
-            array(
+            [
                 'page' => 'rrze-link-checker'
-            ), $atts
+            ],
+            $atts
         );
 
-        return add_query_arg($atts, get_admin_url(NULL, 'admin.php'));
+        return add_query_arg($atts, get_admin_url(null, 'admin.php'));
     }
-    
+
     /**
+     * [httpStatusCodes description]
      * https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+     * @return [type] [description]
      */
-    public static function http_status_codes() {
-        return array(
+    public static function httpStatusCodes()
+    {
+        return [
             400 => __('Bad Request', 'rrze-link-checker'),
             401 => __('Unauthorized', 'rrze-link-checker'),
             402 => __('Payment Required', 'rrze-link-checker'),
@@ -180,15 +194,18 @@ class RRZE_LC_Helper {
             502 => __('Bad Gateway', 'rrze-link-checker'),
             503 => __('Service Unavailable', 'rrze-link-checker'),
             504 => __('Gateway Timeout', 'rrze-link-checker'),
-            505 => __('HTTP Version Not Supported', 'rrze-link-checker')            
-        );
+            505 => __('HTTP Version Not Supported', 'rrze-link-checker')
+        ];
     }
 
     /**
+     * [curlErrorCodes description]
      * http://curl.haxx.se/libcurl/c/libcurl-errors.html
+     * @return array [description]
      */
-    public static function curl_error_codes() {
-        return array (
+    public static function curlErrorCodes()
+    {
+        return [
             0 => __('Ok', 'rrze-link-checker'),
             1 => __('Unsupported protocol', 'rrze-link-checker'),
             2 => __('Failed initialization', 'rrze-link-checker'),
@@ -270,15 +287,6 @@ class RRZE_LC_Helper {
             87 => __('FTP bad file list', 'rrze-link-checker'),
             88 => __('Chunk failed', 'rrze-link-checker'),
             89 => __('No connection available', 'rrze-link-checker'),
-        );
-    }
-    
-}
-
-function _rrze_lc_debug_log($input, $append = true) {
-    if(defined('WP_DEBUG') && WP_DEBUG) {
-        $file = dirname(__FILE__) . '/debug.log';
-        $flags = $append ? FILE_APPEND | LOCK_EX : LOCK_EX;
-        file_put_contents($file, print_r($input, true) . PHP_EOL, $flags);
+        ];
     }
 }

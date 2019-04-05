@@ -1,14 +1,13 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: RRZE Link-Checker\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-05 09:27+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: \n"
-"Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"PO-Revision-Date: 2019-04-05 09:43+0000\n"
+"Last-Translator: RRZE Webteam <webmaster@fau.de>\n"
+"Language-Team: Deutsch\n"
+"Language: de_DE\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,8 +18,8 @@ msgstr ""
 #, php-format
 msgid "%d document in the work queue."
 msgid_plural "%d documents in the work queue."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d Dokument in der Warteschlange."
+msgstr[1] "%d Dokumente in der Warteschlange."
 
 #: includes/Util.php:246
 msgid "Aborted by callback"
@@ -28,11 +27,11 @@ msgstr ""
 
 #: includes/ListTable.php:34
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 #: includes/ListTable.php:54
 msgid "All Errors"
-msgstr ""
+msgstr "Alle Fehler"
 
 #: includes/Util.php:261
 msgid "Bad content encoding"
@@ -56,7 +55,7 @@ msgstr ""
 
 #: includes/Settings.php:86 includes/Settings.php:87 includes/Settings.php:165
 msgid "Broken Links"
-msgstr ""
+msgstr "Fehlerhafte Links"
 
 #: includes/Util.php:258
 msgid "Certificate problem"
@@ -92,19 +91,19 @@ msgstr ""
 
 #: includes/ListTable.php:124
 msgid "Document"
-msgstr ""
+msgstr "Dokument"
 
 #: includes/Settings.php:206
 msgid "Document type"
-msgstr ""
+msgstr "Dokumentenart"
 
 #: includes/Settings.php:491
 msgid "Draft"
-msgstr ""
+msgstr "Entwurf"
 
 #: includes/ListTable.php:123
 msgid "Error message"
-msgstr ""
+msgstr "Fehlermeldung"
 
 #: includes/Util.php:191
 msgid "Expectation Failed"
@@ -124,7 +123,7 @@ msgstr ""
 
 #: includes/ListTable.php:70
 msgid "Filter"
-msgstr ""
+msgstr "Auswahl einschränken"
 
 #: includes/HelpMenu.php:41
 msgid "For more information"
@@ -138,8 +137,8 @@ msgstr ""
 #, php-format
 msgid "Found %d broken link."
 msgid_plural "Found %d broken links."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d fehlerhaften Link gefunden."
+msgstr[1] "%d fehlerhafte Links gefunden."
 
 #: includes/Util.php:221
 msgid "FTP accept timeout"
@@ -223,7 +222,7 @@ msgstr ""
 
 #: includes/Settings.php:222
 msgid "HTTP Request Timout"
-msgstr ""
+msgstr "HTTP-Anfrage-Timeout"
 
 #: includes/Util.php:230
 msgid "HTTP returned error"
@@ -247,11 +246,11 @@ msgstr ""
 
 #: includes/ListTable.php:101 includes/ListTable.php:143
 msgid "Ignore"
-msgstr ""
+msgstr "Ignorieren"
 
 #: includes/ListTable.php:35
 msgid "Ignored"
-msgstr ""
+msgstr "Ignoriert"
 
 #: includes/Util.php:248
 msgid "Interface failed"
@@ -279,11 +278,11 @@ msgstr ""
 
 #: includes/Dashboard.php:22 includes/Settings.php:73 includes/Settings.php:74
 msgid "Link Checker"
-msgstr ""
+msgstr "Link-Checker"
 
 #: includes/ListTable.php:122
 msgid "Link Url"
-msgstr ""
+msgstr "Link-Url"
 
 #: includes/Util.php:267
 msgid "Login denied"
@@ -363,7 +362,7 @@ msgstr ""
 
 #: includes/Settings.php:493
 msgid "Private"
-msgstr ""
+msgstr "Privat"
 
 #: includes/Util.php:181
 msgid "Proxy Authentication Required"
@@ -371,7 +370,7 @@ msgstr ""
 
 #: includes/Settings.php:490
 msgid "Published"
-msgstr ""
+msgstr "Veröffentlicht"
 
 #: includes/Util.php:229
 msgid "Quote error"
@@ -433,8 +432,8 @@ msgstr ""
 msgctxt "rrze-lc-http-request-timeout"
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Sekunde"
+msgstr[1] "Sekunden"
 
 #. Author of the plugin
 msgid "RRZE-Webteam"
@@ -450,7 +449,7 @@ msgstr ""
 
 #: includes/Settings.php:492
 msgid "Scheduled"
-msgstr ""
+msgstr "Geplant"
 
 #: includes/Settings.php:169
 msgid "Search"
@@ -471,11 +470,11 @@ msgstr ""
 #: includes/Settings.php:98 includes/Settings.php:99 includes/Settings.php:184
 #: includes/Settings.php:394
 msgid "Settings"
-msgstr ""
+msgstr "Einstellungen"
 
 #: includes/Settings.php:281
 msgid "Settings saved."
-msgstr ""
+msgstr "Einstellungen gespeichert."
 
 #: includes/Util.php:281
 msgid "Socket not ready"
@@ -527,7 +526,7 @@ msgstr ""
 
 #: includes/Settings.php:214
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: includes/Util.php:251
 msgid "Telnet option syntax"
@@ -551,7 +550,7 @@ msgstr ""
 
 #: includes/Settings.php:304
 msgid "The document type field is required."
-msgstr ""
+msgstr "Der Dokumentenart-Feld ist erforderlich."
 
 #: rrze-link-checker.php:60
 #, php-format
@@ -559,6 +558,8 @@ msgid ""
 "The server is running PHP version %1$s. The Plugin requires at least PHP "
 "version %2$s."
 msgstr ""
+"Auf dem Server läuft PHP Version %1$s. Das Plugin benötigt mindestens PHP "
+"Version %2$s."
 
 #: rrze-link-checker.php:62
 #, php-format
@@ -566,10 +567,12 @@ msgid ""
 "The server is running WordPress version %1$s. The Plugin requires at least "
 "WordPress version %2$s."
 msgstr ""
+"Auf dem Server läuft WordPress Version %1$s. Das Plugin benötigt mindestens "
+"WordPress Version %2$s."
 
 #: includes/Settings.php:313
 msgid "The status field is required."
-msgstr ""
+msgstr "Der Status-Feld ist erforderlich."
 
 #: includes/Util.php:249
 msgid "Too many redirections"
@@ -577,7 +580,7 @@ msgstr ""
 
 #: includes/Settings.php:495
 msgid "Trash"
-msgstr ""
+msgstr "Papierkorb"
 
 #: includes/Util.php:175
 msgid "Unauthorized"
@@ -585,11 +588,11 @@ msgstr ""
 
 #: includes/ListTable.php:99 includes/ListTable.php:141
 msgid "Unignore"
-msgstr ""
+msgstr "Wiederherstellen"
 
 #: includes/Settings.php:487 includes/Util.php:47 includes/Util.php:61
 msgid "Unknown"
-msgstr ""
+msgstr "Unbekannt"
 
 #: includes/Util.php:250
 msgid "Unknown option"
@@ -617,7 +620,7 @@ msgstr ""
 
 #: includes/Dashboard.php:77
 msgid "View broken links"
-msgstr ""
+msgstr "Fehlerhafte Links anschauen"
 
 #: includes/Util.php:231
 msgid "Write error"
