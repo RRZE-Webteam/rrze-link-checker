@@ -1,0 +1,631 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: RRZE Link-Checker\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-05 09:27+0000\n"
+"PO-Revision-Date: 2019-04-05 09:43+0000\n"
+"Last-Translator: RRZE Webteam <webmaster@fau.de>\n"
+"Language-Team: Deutsch (Sie)\n"
+"Language: de_DE_formal\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.2.2; wp-5.1.1"
+
+#: includes/Dashboard.php:98
+#, php-format
+msgid "%d document in the work queue."
+msgid_plural "%d documents in the work queue."
+msgstr[0] "%d Dokument in der Warteschlange."
+msgstr[1] "%d Dokumente in der Warteschlange."
+
+#: includes/Util.php:246
+msgid "Aborted by callback"
+msgstr ""
+
+#: includes/ListTable.php:34
+msgid "All"
+msgstr "Alle"
+
+#: includes/ListTable.php:54
+msgid "All Errors"
+msgstr "Alle Fehler"
+
+#: includes/Util.php:261
+msgid "Bad content encoding"
+msgstr ""
+
+#: includes/Util.php:241
+msgid "Bad download resume"
+msgstr ""
+
+#: includes/Util.php:247
+msgid "Bad function argument"
+msgstr ""
+
+#: includes/Util.php:194
+msgid "Bad Gateway"
+msgstr ""
+
+#: includes/Util.php:174
+msgid "Bad Request"
+msgstr ""
+
+#: includes/Settings.php:86 includes/Settings.php:87 includes/Settings.php:165
+msgid "Broken Links"
+msgstr "Fehlerhafte Links"
+
+#: includes/Util.php:258
+msgid "Certificate problem"
+msgstr ""
+
+#: includes/Util.php:288
+msgid "Chunk failed"
+msgstr ""
+
+#: includes/Util.php:183
+msgid "Conflict"
+msgstr ""
+
+#: includes/Util.php:276
+msgid "Conversion callbacks"
+msgstr ""
+
+#: includes/Util.php:275
+msgid "Conversion failed"
+msgstr ""
+
+#: includes/Util.php:216
+msgid "Couldn't connect"
+msgstr ""
+
+#: includes/Util.php:215
+msgid "Couldn't resolve host"
+msgstr ""
+
+#: includes/Util.php:214
+msgid "Couldn't resolve proxy"
+msgstr ""
+
+#: includes/ListTable.php:124
+msgid "Document"
+msgstr "Dokument"
+
+#: includes/Settings.php:206
+msgid "Document type"
+msgstr "Dokumentenart"
+
+#: includes/Settings.php:491
+msgid "Draft"
+msgstr "Entwurf"
+
+#: includes/ListTable.php:123
+msgid "Error message"
+msgstr "Fehlermeldung"
+
+#: includes/Util.php:191
+msgid "Expectation Failed"
+msgstr ""
+
+#: includes/Util.php:211
+msgid "Failed initialization"
+msgstr ""
+
+#: includes/Util.php:242
+msgid "File couldn't read file"
+msgstr ""
+
+#: includes/Util.php:263
+msgid "File size exceeded"
+msgstr ""
+
+#: includes/ListTable.php:70
+msgid "Filter"
+msgstr "Auswahl einschränken"
+
+#: includes/HelpMenu.php:41
+msgid "For more information"
+msgstr ""
+
+#: includes/Util.php:177
+msgid "Forbidden"
+msgstr ""
+
+#: includes/Dashboard.php:80
+#, php-format
+msgid "Found %d broken link."
+msgid_plural "Found %d broken links."
+msgstr[0] "%d fehlerhaften Link gefunden."
+msgstr[1] "%d fehlerhafte Links gefunden."
+
+#: includes/Util.php:221
+msgid "FTP accept timeout"
+msgstr ""
+
+#: includes/Util.php:219
+msgid "FTP access failed"
+msgstr ""
+
+#: includes/Util.php:287
+msgid "FTP bad file list"
+msgstr ""
+
+#: includes/Util.php:224
+msgid "FTP can't get host"
+msgstr ""
+
+#: includes/Util.php:228
+msgid "FTP couldn't retrieve file"
+msgstr ""
+
+#: includes/Util.php:226
+msgid "FTP couldn't set type"
+msgstr ""
+
+#: includes/Util.php:237
+msgid "FTP couldn't use REST"
+msgstr ""
+
+#: includes/Util.php:236
+msgid "FTP port failed"
+msgstr ""
+
+#: includes/Util.php:284
+msgid "FTP PRET failed"
+msgstr ""
+
+#: includes/Util.php:272
+msgid "FTP unknown ID"
+msgstr ""
+
+#: includes/Util.php:223
+msgid "FTP weird 227 format"
+msgstr ""
+
+#: includes/Util.php:220
+msgid "FTP weird pass reply"
+msgstr ""
+
+#: includes/Util.php:222
+msgid "FTP weird pasv reply"
+msgstr ""
+
+#: includes/Util.php:217
+msgid "FTP weird server reply"
+msgstr ""
+
+#: includes/Util.php:245
+msgid "Function not found"
+msgstr ""
+
+#: includes/Util.php:196
+msgid "Gateway Timeout"
+msgstr ""
+
+#: includes/Util.php:184
+msgid "Gone"
+msgstr ""
+
+#: includes/Util.php:253
+msgid "Got nothing"
+msgstr ""
+
+#: includes/HelpMenu.php:32
+msgid "Here comes the Context Help content."
+msgstr ""
+
+#: includes/Util.php:239
+msgid "HTTP post error"
+msgstr ""
+
+#: includes/Settings.php:222
+msgid "HTTP Request Timout"
+msgstr "HTTP-Anfrage-Timeout"
+
+#: includes/Util.php:230
+msgid "HTTP returned error"
+msgstr ""
+
+#: includes/Util.php:197
+msgid "HTTP Version Not Supported"
+msgstr ""
+
+#: includes/Util.php:225
+msgid "HTTP2 framing layer problem"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://blogs.fau.de/webworking/"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://github.com/RRZE-Webteam/rrze-cf7-redirect"
+msgstr ""
+
+#: includes/ListTable.php:101 includes/ListTable.php:143
+msgid "Ignore"
+msgstr "Ignorieren"
+
+#: includes/ListTable.php:35
+msgid "Ignored"
+msgstr "Ignoriert"
+
+#: includes/Util.php:248
+msgid "Interface failed"
+msgstr ""
+
+#: includes/Util.php:192
+msgid "Internal Server Error"
+msgstr ""
+
+#: includes/Util.php:243
+msgid "LDAP cannot bind"
+msgstr ""
+
+#: includes/Util.php:262
+msgid "LDAP invalid URL"
+msgstr ""
+
+#: includes/Util.php:244
+msgid "LDAP search failed"
+msgstr ""
+
+#: includes/Util.php:185
+msgid "Length Required"
+msgstr ""
+
+#: includes/Dashboard.php:22 includes/Settings.php:73 includes/Settings.php:74
+msgid "Link Checker"
+msgstr "Link-Checker"
+
+#: includes/ListTable.php:122
+msgid "Link Url"
+msgstr "Link-Url"
+
+#: includes/Util.php:267
+msgid "Login denied"
+msgstr ""
+
+#: includes/Util.php:179
+msgid "Method Not Allowed"
+msgstr ""
+
+#: includes/Dashboard.php:90
+msgid "No broken links found."
+msgstr ""
+
+#: includes/Util.php:289
+msgid "No connection available"
+msgstr ""
+
+#: includes/Dashboard.php:110
+msgid "No documents in the work queue."
+msgstr ""
+
+#: includes/Util.php:180
+msgid "Not Acceptable"
+msgstr ""
+
+#: includes/Util.php:213
+msgid "Not built-in"
+msgstr ""
+
+#: includes/Util.php:178
+msgid "Not Found"
+msgstr ""
+
+#: includes/Util.php:193
+msgid "Not Implemented"
+msgstr ""
+
+#: includes/Settings.php:355
+msgid "Number of items per page:"
+msgstr ""
+
+#: includes/Util.php:209
+msgid "Ok"
+msgstr ""
+
+#: includes/Util.php:235
+msgid "Operation timedout"
+msgstr ""
+
+#: includes/Util.php:234
+msgid "Out of memory"
+msgstr ""
+
+#: includes/HelpMenu.php:36
+msgid "Overview"
+msgstr ""
+
+#: includes/Util.php:227
+msgid "Partial file"
+msgstr ""
+
+#: includes/Util.php:176
+msgid "Payment Required"
+msgstr ""
+
+#: includes/Util.php:252
+msgid "Peer failed verification"
+msgstr ""
+
+#: includes/Settings.php:494
+msgid "Pending Review"
+msgstr ""
+
+#: includes/Util.php:186
+msgid "Precondition Failed"
+msgstr ""
+
+#: includes/Settings.php:493
+msgid "Private"
+msgstr "Privat"
+
+#: includes/Util.php:181
+msgid "Proxy Authentication Required"
+msgstr ""
+
+#: includes/Settings.php:490
+msgid "Published"
+msgstr "Veröffentlicht"
+
+#: includes/Util.php:229
+msgid "Quote error"
+msgstr ""
+
+#: includes/Util.php:238
+msgid "Range error"
+msgstr ""
+
+#: includes/Util.php:233
+msgid "Read error"
+msgstr ""
+
+#: includes/Util.php:257
+msgid "Receive error"
+msgstr ""
+
+#: includes/Util.php:218
+msgid "Remote access denied"
+msgstr ""
+
+#: includes/Util.php:270
+msgid "Remote disk full"
+msgstr ""
+
+#: includes/Util.php:273
+msgid "Remote file exists"
+msgstr ""
+
+#: includes/Util.php:278
+msgid "Remote file not found"
+msgstr ""
+
+#: includes/Util.php:187
+msgid "Request Entity Too Large"
+msgstr ""
+
+#: includes/Util.php:182
+msgid "Request Timeout"
+msgstr ""
+
+#: includes/Util.php:188
+msgid "Request-URI Too Long"
+msgstr ""
+
+#: includes/Util.php:190
+msgid "Requested Range Not Satisfiable"
+msgstr ""
+
+#. Name of the plugin
+msgid "RRZE Link-Checker"
+msgstr ""
+
+#: includes/HelpMenu.php:42
+msgid "RRZE Webteam on Github"
+msgstr ""
+
+#: includes/Settings.php:255
+msgctxt "rrze-lc-http-request-timeout"
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "Sekunde"
+msgstr[1] "Sekunden"
+
+#. Author of the plugin
+msgid "RRZE-Webteam"
+msgstr ""
+
+#: includes/Util.php:285
+msgid "RTSP CSEQ error"
+msgstr ""
+
+#: includes/Util.php:286
+msgid "RTSP session error"
+msgstr ""
+
+#: includes/Settings.php:492
+msgid "Scheduled"
+msgstr "Geplant"
+
+#: includes/Settings.php:169
+msgid "Search"
+msgstr ""
+
+#: includes/Util.php:256
+msgid "Send error"
+msgstr ""
+
+#: includes/Util.php:265
+msgid "Send fail rewind"
+msgstr ""
+
+#: includes/Util.php:195
+msgid "Service Unavailable"
+msgstr ""
+
+#: includes/Settings.php:98 includes/Settings.php:99 includes/Settings.php:184
+#: includes/Settings.php:394
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: includes/Settings.php:281
+msgid "Settings saved."
+msgstr "Einstellungen gespeichert."
+
+#: includes/Util.php:281
+msgid "Socket not ready"
+msgstr ""
+
+#: includes/Util.php:279
+msgid "SSH error"
+msgstr ""
+
+#: includes/Util.php:260
+msgid "SSL CA certificate"
+msgstr ""
+
+#: includes/Util.php:277
+msgid "SSL CA certificate bad file"
+msgstr ""
+
+#: includes/Util.php:259
+msgid "SSL cipher"
+msgstr ""
+
+#: includes/Util.php:240
+msgid "SSL connect error"
+msgstr ""
+
+#: includes/Util.php:282
+msgid "SSL CRL bad file"
+msgstr ""
+
+#: includes/Util.php:254
+msgid "SSL engine not found"
+msgstr ""
+
+#: includes/Util.php:255
+msgid "SSL engine set failed"
+msgstr ""
+
+#: includes/Util.php:266
+msgid "SSL initialization failed"
+msgstr ""
+
+#: includes/Util.php:283
+msgid "SSL issue error"
+msgstr ""
+
+#: includes/Util.php:280
+msgid "SSL shutdown failed"
+msgstr ""
+
+#: includes/Settings.php:214
+msgid "Status"
+msgstr "Status"
+
+#: includes/Util.php:251
+msgid "Telnet option syntax"
+msgstr ""
+
+#: includes/Util.php:268
+msgid "TFTP file not found"
+msgstr ""
+
+#: includes/Util.php:271
+msgid "TFTP illegal"
+msgstr ""
+
+#: includes/Util.php:274
+msgid "TFTP no such user"
+msgstr ""
+
+#: includes/Util.php:269
+msgid "TFTP permission"
+msgstr ""
+
+#: includes/Settings.php:304
+msgid "The document type field is required."
+msgstr "Der Dokumentenart-Feld ist erforderlich."
+
+#: rrze-link-checker.php:60
+#, php-format
+msgid ""
+"The server is running PHP version %1$s. The Plugin requires at least PHP "
+"version %2$s."
+msgstr ""
+"Auf dem Server läuft PHP Version %1$s. Das Plugin benötigt mindestens PHP "
+"Version %2$s."
+
+#: rrze-link-checker.php:62
+#, php-format
+msgid ""
+"The server is running WordPress version %1$s. The Plugin requires at least "
+"WordPress version %2$s."
+msgstr ""
+"Auf dem Server läuft WordPress Version %1$s. Das Plugin benötigt mindestens "
+"WordPress Version %2$s."
+
+#: includes/Settings.php:313
+msgid "The status field is required."
+msgstr "Der Status-Feld ist erforderlich."
+
+#: includes/Util.php:249
+msgid "Too many redirections"
+msgstr ""
+
+#: includes/Settings.php:495
+msgid "Trash"
+msgstr "Papierkorb"
+
+#: includes/Util.php:175
+msgid "Unauthorized"
+msgstr ""
+
+#: includes/ListTable.php:99 includes/ListTable.php:141
+msgid "Unignore"
+msgstr "Wiederherstellen"
+
+#: includes/Settings.php:487 includes/Util.php:47 includes/Util.php:61
+msgid "Unknown"
+msgstr "Unbekannt"
+
+#: includes/Util.php:250
+msgid "Unknown option"
+msgstr ""
+
+#: includes/Util.php:189
+msgid "Unsupported Media Type"
+msgstr ""
+
+#: includes/Util.php:210
+msgid "Unsupported protocol"
+msgstr ""
+
+#: includes/Util.php:232
+msgid "Upload failed"
+msgstr ""
+
+#: includes/Util.php:212
+msgid "URL malformat"
+msgstr ""
+
+#: includes/Util.php:264
+msgid "Use SSL failed"
+msgstr ""
+
+#: includes/Dashboard.php:77
+msgid "View broken links"
+msgstr "Fehlerhafte Links anschauen"
+
+#: includes/Util.php:231
+msgid "Write error"
+msgstr ""
+
+#. Description of the plugin
+msgid "Überprüfung auf defekte Links."
+msgstr ""
