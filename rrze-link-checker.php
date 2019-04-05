@@ -4,7 +4,7 @@
 Plugin Name:     RRZE Link-Checker
 Plugin URI:      https://github.com/RRZE-Webteam/rrze-cf7-redirect
 Description:     Überprüfung auf defekte Links.
-Version:         1.4.0
+Version:         2.0.0
 Author:          RRZE-Webteam
 Author URI:      https://blogs.fau.de/webworking/
 License:         GNU General Public License v2
@@ -25,7 +25,7 @@ const RRZE_PHP_VERSION = '7.1';
 const RRZE_WP_VERSION = '5.1';
 
 const RRZE_PLUGIN_FILE = __FILE__;
-const RRZE_PLUGIN_VERSION = '1.4.0';
+const RRZE_PLUGIN_VERSION = '2.0.0';
 
 spl_autoload_register(function ($class) {
     $prefix = __NAMESPACE__;
