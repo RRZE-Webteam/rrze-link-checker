@@ -6,6 +6,7 @@ defined('ABSPATH') || exit;
 
 use RRZE\LinkChecker\DB;
 use RRZE\LinkChecker\Worker;
+use RRZE\LinkChecker\Options;
 
 class Model
 {
@@ -26,6 +27,7 @@ class Model
             return;
         }
 
+        $options = Options::getOptions();
         $post_type = get_post_type($postId);
 
         $wpdb->delete(
@@ -38,7 +40,7 @@ class Model
             )
         );
 
-        if (in_array($post_type, self::$options->post_types)) {
+        if (in_array($post_type, $options->post_types)) {
             $wpdb->replace(
                 $wpdb->prefix . DB::getPostsTableName(),
                 [
